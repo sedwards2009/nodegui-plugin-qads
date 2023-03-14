@@ -1,0 +1,45 @@
+{
+    "name": "nodegui-plugin-qads",
+    "version": "0.1.0",
+    "description": "NodeGui plugin for Qt Advanced Docking System",
+    "main": "dist/main.js",
+    "typings": "dist/main.d.ts",
+    "scripts": {
+        "build": "npm run build:ts && npm run build:addon",
+        "clean": "rimraf dist build",
+        "install": "npm run setupbinary || npm run build:addon",
+        "build:addon": "cross-env CMAKE_BUILD_PARALLEL_LEVEL=8 cmake-js compile",
+        "build:ts": "tsc",
+        "prepublish": "npm run clean && npm run build:ts",
+        "setupbinary": "node ./scripts/setupBinary.js",
+        "demo": "qode dist/demo.js"
+    },
+    "author": "Simon Edwards <simon@simonzone.com>",
+    "license": "LGPL2",
+    "files": [
+        "src/cpp/*",
+        "dist/addon.js",
+        "dist/main.js",
+        "dist/addon.d.ts",
+        "dist/main.d.ts",
+        "scripts/setupBinary.js",
+        "README.md",
+        "CMakeLists.txt"
+    ],
+    "dependencies": {
+        "@nodegui/artifact-installer": "^1.1.0",
+        "@nodegui/nodegui": "^0.59.0",
+        "node-addon-api": "^3.0.0",
+        "tar": "^6.0.1"
+    },
+    "devDependencies": {
+        "@types/node": "^14.0.5",
+        "cmake-js": "^6.1.0",
+        "cross-env": "^7.0.2",
+        "rimraf": "^3.0.2",
+        "typescript": "~4.9.5"
+    },
+    "overrides": {
+        "7zip-bin": "5.1.1"
+    }
+}
