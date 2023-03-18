@@ -20,6 +20,10 @@ class DLL_EXPORT CDockAreaTitleBarWrap : public Napi::ObjectWrap<CDockAreaTitleB
   CDockAreaTitleBarWrap(const Napi::CallbackInfo& info);
   ~CDockAreaTitleBarWrap();
   ads::CDockAreaTitleBar* getInternalInstance();
+  Napi::Value insertWidget(const Napi::CallbackInfo& info);
+  Napi::Value indexOf(const Napi::CallbackInfo& info);
+  Napi::Value tabBar(const Napi::CallbackInfo& info);
+
   // class constructor
   static Napi::FunctionReference constructor;
   // wrapped methods

@@ -4,3 +4,4 @@ export { CDockAreaWidget, CDockAreaWidgetSignals } from './CDockAreaWidget';
 export { CDockAreaTitleBar, CDockAreaTitleBarSignals } from './CDockAreaTitleBar';
 export { CDockWidget, CDockWidgetSignals, DockWidgetFeature, eToggleViewActionMode } from './CDockWidget';
 export { DockWidgetArea } from './adsGlobals';
+export { CDockAreaTabBar } from './CDockAreaTabBar';

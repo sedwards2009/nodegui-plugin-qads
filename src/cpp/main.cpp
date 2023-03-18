@@ -4,6 +4,7 @@
 #include "cdockareawidget_wrap.h"
 #include "cdockwidget_wrap.h"
 #include "cdockareatitlebar_wrap.h"
+#include "cdockareatabbar_wrap.h"
 
 
 Napi::Object Main(Napi::Env env, Napi::Object exports) {
@@ -12,6 +13,7 @@ Napi::Object Main(Napi::Env env, Napi::Object exports) {
   CDockAreaWidgetWrap::init(env, exports);
   CDockWidgetWrap::init(env, exports);
   CDockAreaTitleBarWrap::init(env, exports);
+  CDockAreaTabBarWrap::init(env, exports);
   return exports;
 }
 
