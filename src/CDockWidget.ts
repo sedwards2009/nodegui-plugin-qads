@@ -50,7 +50,13 @@ export class CDockWidget extends QFrame<CDockWidgetSignals> {
 wrapperCache.registerWrapper('CDockWidgetWrap', CDockWidget);
 
 export interface CDockWidgetSignals extends QFrameSignals {
-
+  viewToggled: (open: boolean) => void;
+  closed: () => void;
+  titleChanged: (title: string) => void;
+  topLevelChanged: (topLevel: boolean) => void;
+  closeRequested: () => void;
+  visibilityChanged: (visible: boolean) => void;
+  featuresChanged: (features: number /* DockWidgetFeatures */) => void;
 }
 
 export enum DockWidgetFeature {

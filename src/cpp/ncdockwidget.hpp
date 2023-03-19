@@ -14,17 +14,52 @@ class DLL_EXPORT NCDockWidget : public ads::CDockWidget, public NodeWidget {
 
   virtual void connectSignalsToEventEmitter() {
     QFRAME_SIGNALS
-    // QObject::connect(this, &QLabel::linkActivated, [=](const QString& link) {
-    //   Napi::Env env = this->emitOnNode.Env();
-    //   Napi::HandleScope scope(env);
-    //   this->emitOnNode.Call({Napi::String::New(env, "linkActivated"),
-    //                          Napi::String::New(env, link.toStdString())});
-    // });
-    // QObject::connect(this, &QLabel::linkHovered, [=](const QString& link) {
-    //   Napi::Env env = this->emitOnNode.Env();
-    //   Napi::HandleScope scope(env);
-    //   this->emitOnNode.Call({Napi::String::New(env, "linkHovered"),
-    //                          Napi::String::New(env, link.toStdString())});
-    // });
+
+    QObject::connect(this, &ads::CDockWidget::viewToggled, [=](bool open) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "viewToggled"),
+                             Napi::Boolean::New(env, open)});
+    });
+
+    QObject::connect(this, &ads::CDockWidget::closed, [=]() {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "closed")});
+    });
+
+    QObject::connect(this, &ads::CDockWidget::titleChanged, [=](const QString &title) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "titleChanged"),
+                             Napi::Value::From(env, title.toStdString())});
+    });
+
+    QObject::connect(this, &ads::CDockWidget::topLevelChanged, [=](bool topLevel) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "topLevelChanged"),
+                             Napi::Boolean::New(env, topLevel)});
+    });
+
+    QObject::connect(this, &ads::CDockWidget::closeRequested, [=]() {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "closeRequested")});
+    });
+
+    QObject::connect(this, &ads::CDockWidget::visibilityChanged, [=](bool visible) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "visibilityChanged"),
+                             Napi::Boolean::New(env, visible)});
+    });
+
+    QObject::connect(this, &ads::CDockWidget::featuresChanged, [=](ads::CDockWidget::DockWidgetFeatures features) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "featuresChanged"),
+                             Napi::Number::New(env, features)});
+    });
   }
 };
