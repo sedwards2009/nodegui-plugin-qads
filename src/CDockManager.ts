@@ -23,9 +23,45 @@ export class CDockManager extends CDockContainerWidget<CDockManagerSignals> {
       index = -1): CDockAreaWidget {
     return wrapperCache.getWrapper(this.native.addDockWidget(
       area,
-      dockWidget.native.__external_qobject__(),
-      dockAreaWidget == null ? null : dockAreaWidget.native.__external_qobject__(),
+      dockWidget.native,
+      dockAreaWidget == null ? null : dockAreaWidget.native,
       index)) as CDockAreaWidget;
+  }
+
+  addDockWidgetToContainer(area: DockWidgetArea, dockWidget: CDockWidget,
+      dockContainerWidget: CDockContainerWidget): CDockAreaWidget {
+    return wrapperCache.getWrapper(this.native.addDockWidgetToContainer(
+      area,
+      dockWidget.native,
+      dockContainerWidget.native)) as CDockAreaWidget;
+  }
+
+	// CAutoHideDockContainer* addAutoHideDockWidget(SideBarLocation Location, CDockWidget* Dockwidget);
+	// CAutoHideDockContainer* addAutoHideDockWidgetToContainer(SideBarLocation Location,
+	// 	CDockWidget* Dockwidget, CDockContainerWidget* DockContainerWidget);
+
+  addDockWidgetTab(area: DockWidgetArea, dockWidget: CDockWidget): CDockAreaWidget {
+    return wrapperCache.getWrapper(this.native.addDockWidgetTab(
+      area,
+      dockWidget.native,
+    )) as CDockAreaWidget;
+  }
+
+  addDockWidgetTabToArea(dockWidget: CDockWidget, dockAreaWidget: CDockAreaWidget, index = -1): CDockAreaWidget {
+    return wrapperCache.getWrapper(this.native.addDockWidgetTabToArea(
+      dockWidget.native,
+      dockAreaWidget.native,
+      index
+    )) as CDockAreaWidget;
+  }
+
+	// CFloatingDockContainer* addDockWidgetFloating(CDockWidget* Dockwidget);
+  findDockWidget(objectName: string): CDockWidget {
+    return wrapperCache.getWrapper(this.native.findDockWidget(objectName)) as CDockWidget;
+  }
+
+	removeDockWidget(dockWidget: CDockWidget): void {
+    this.native.removeDockWidget(dockWidget);
   }
 
   static setConfigFlag(flag: eConfigFlag, on: boolean = true): void {

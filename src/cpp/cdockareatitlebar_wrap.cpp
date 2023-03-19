@@ -62,9 +62,8 @@ Napi::Value CDockAreaTitleBarWrap::insertWidget(const Napi::CallbackInfo& info) 
   Napi::Env env = info.Env();
   int index = info[0].As<Napi::Number>().Int32Value();
   Napi::Object widgetWidgetObject = info[1].As<Napi::Object>();
-    NodeWidgetWrap* widgetWidgetWrap =
-        Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(widgetWidgetObject);
-    QWidget *widget = widgetWidgetWrap->getInternalInstance();
+  NodeWidgetWrap* widgetWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(widgetWidgetObject);
+  QWidget *widget = widgetWidgetWrap->getInternalInstance();
   this->instance->insertWidget(index, widget);
   return env.Null();
 }

@@ -24,15 +24,11 @@ class DLL_EXPORT CDockManagerWrap : public Napi::ObjectWrap<CDockManagerWrap> {
   static Napi::FunctionReference constructor;
   // wrapped methods
   Napi::Value addDockWidget(const Napi::CallbackInfo& info);
-  // Napi::Value selectionStart(const Napi::CallbackInfo& info);
-  // Napi::Value setBuddy(const Napi::CallbackInfo& info);
-  // Napi::Value buddy(const Napi::CallbackInfo& info);
-  // Napi::Value clear(const Napi::CallbackInfo& info);
-  // Napi::Value setMovie(const Napi::CallbackInfo& info);
-  // Napi::Value setNumDouble(const Napi::CallbackInfo& info);
-  // Napi::Value setNumInt(const Napi::CallbackInfo& info);
-  // Napi::Value setPicture(const Napi::CallbackInfo& info);
-  // Napi::Value setPixmap(const Napi::CallbackInfo& info);
+	Napi::Value addDockWidgetToContainer(const Napi::CallbackInfo& info);
+	Napi::Value addDockWidgetTab(const Napi::CallbackInfo& info);
+	Napi::Value addDockWidgetTabToArea(const Napi::CallbackInfo& info);
+	Napi::Value findDockWidget(const Napi::CallbackInfo& info);
+	Napi::Value removeDockWidget(const Napi::CallbackInfo& info);
 };
 
 namespace StaticCDockManagerWrapMethods {

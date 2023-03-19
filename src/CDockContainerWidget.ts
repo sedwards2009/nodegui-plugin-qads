@@ -2,7 +2,7 @@ import { QFrame, QFrameSignals, wrapperCache } from '@nodegui/nodegui';
 // import addon from './addon';
 
 
-export class CDockContainerWidget<Signals extends CDockContainerWidgetSignals> extends QFrame<Signals> {
+export class CDockContainerWidget<Signals extends CDockContainerWidgetSignals=CDockContainerWidgetSignals> extends QFrame<Signals> {
 
 }
 

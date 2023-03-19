@@ -10,6 +10,12 @@ Napi::Object CDockManagerWrap::init(Napi::Env env, Napi::Object exports) {
   Napi::Function func = DefineClass(
       env, CLASSNAME,
       {InstanceMethod("addDockWidget", &CDockManagerWrap::addDockWidget),
+       InstanceMethod("addDockWidget", &CDockManagerWrap::addDockWidget),
+	     InstanceMethod("addDockWidgetToContainer", &CDockManagerWrap::addDockWidgetToContainer),
+	     InstanceMethod("addDockWidgetTab", &CDockManagerWrap::addDockWidgetTab),
+	     InstanceMethod("addDockWidgetTabToArea", &CDockManagerWrap::addDockWidgetTabToArea),
+	     InstanceMethod("findDockWidget", &CDockManagerWrap::findDockWidget),
+	     InstanceMethod("removeDockWidget", &CDockManagerWrap::removeDockWidget),
        StaticMethod("setConfigFlag", &StaticCDockManagerWrapMethods::setConfigFlag),
        QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockManagerWrap)});
   constructor = Napi::Persistent(func);
@@ -36,8 +42,7 @@ CDockManagerWrap::CDockManagerWrap(const Napi::CallbackInfo& info)
     } else {
       // --- Construct a new instance and pass a parent
       Napi::Object parentObject = info[0].As<Napi::Object>();
-      NodeWidgetWrap* parentWidgetWrap =
-          Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(parentObject);
+      NodeWidgetWrap* parentWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(parentObject);
       this->instance = new NCDockManager(parentWidgetWrap->getInternalInstance());
     }
   } else {
@@ -61,12 +66,16 @@ Napi::Value CDockManagerWrap::addDockWidget(const Napi::CallbackInfo& info) {
 
   int area = info[0].As<Napi::Number>().Int32Value();
 
-  QObject* dockObject = info[1].As<Napi::External<QObject>>().Data();
+  Napi::Object dockObjectNapi = info[1].As<Napi::Object>();
+  NodeWidgetWrap* dockWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockObjectNapi);
+  QObject* dockObject = dockWidgetWrap->getInternalInstance();
   ads::CDockWidget* dockWidget = qobject_cast<ads::CDockWidget*>(dockObject);
 
   ads::CDockAreaWidget* dockAreaWidget = nullptr;
   if ( ! info[2].IsNull()) {
-    QObject* dockAreaObject = info[2].As<Napi::External<QObject>>().Data();
+    Napi::Object dockAreaObjectNapi = info[2].As<Napi::Object>();
+    NodeWidgetWrap* dockAreaWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockAreaObjectNapi);
+    QObject* dockAreaObject = dockAreaWidgetWrap->getInternalInstance();
     dockAreaWidget = qobject_cast<ads::CDockAreaWidget*>(dockAreaObject);
   }
 
@@ -79,6 +88,111 @@ Napi::Value CDockManagerWrap::addDockWidget(const Napi::CallbackInfo& info) {
   } else {
     return env.Null();
   }
+}
+
+Napi::Value CDockManagerWrap::addDockWidgetToContainer(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  int area = info[0].As<Napi::Number>().Int32Value();
+
+  ads::CDockWidget* dockWidget = nullptr;
+  if ( ! info[1].IsNull()) {
+    Napi::Object dockObjectNapi = info[1].As<Napi::Object>();
+    NodeWidgetWrap* dockWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockObjectNapi);
+    QObject* dockObject = dockWidgetWrap->getInternalInstance();
+    dockWidget = qobject_cast<ads::CDockWidget*>(dockObject);
+  }
+
+  ads::CDockContainerWidget* dockContainerWidget = nullptr;
+  if ( ! info[2].IsNull()) {
+    Napi::Object dockContainerNapi = info[2].As<Napi::Object>();
+    NodeWidgetWrap* dockContianerWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockContainerNapi);
+    QObject* dockContainer = dockContianerWrap->getInternalInstance();
+    dockContainerWidget = qobject_cast<ads::CDockContainerWidget*>(dockContainer);
+  }
+
+  ads::CDockAreaWidget* dockAreaWidgetResult = this->instance->addDockWidgetToContainer(
+    static_cast<ads::DockWidgetArea>(area),
+    dockWidget, dockContainerWidget);
+  if (dockAreaWidgetResult) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockAreaWidgetResult));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockManagerWrap::addDockWidgetTab(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  int area = info[0].As<Napi::Number>().Int32Value();
+
+  ads::CDockWidget* dockWidget = nullptr;
+  if ( ! info[1].IsNull()) {
+    Napi::Object dockObjectNapi = info[1].As<Napi::Object>();
+    NodeWidgetWrap* dockWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockObjectNapi);
+    QObject* dockObject = dockWidgetWrap->getInternalInstance();
+    dockWidget = qobject_cast<ads::CDockWidget*>(dockObject);
+  }
+
+  ads::CDockAreaWidget* dockAreaWidgetResult = this->instance->addDockWidgetTab(
+    static_cast<ads::DockWidgetArea>(area), dockWidget);
+  if (dockAreaWidgetResult) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockAreaWidgetResult));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockManagerWrap::addDockWidgetTabToArea(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  Napi::Object dockObjectNapi = info[0].As<Napi::Object>();
+  NodeWidgetWrap* dockWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockObjectNapi);
+  QObject* dockObject = dockWidgetWrap->getInternalInstance();
+  ads::CDockWidget* dockWidget = qobject_cast<ads::CDockWidget*>(dockObject);
+
+  Napi::Object dockAreaObjectNapi = info[1].As<Napi::Object>();
+  NodeWidgetWrap* dockAreaWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockAreaObjectNapi);
+  QObject* dockAreaObject = dockAreaWidgetWrap->getInternalInstance();
+  ads::CDockAreaWidget*dockAreaWidget = qobject_cast<ads::CDockAreaWidget*>(dockAreaObject);
+
+  int index = info[2].As<Napi::Number>().Int32Value();
+
+  ads::CDockAreaWidget* dockAreaWidgetResult = this->instance->addDockWidgetTabToArea(
+    dockWidget, dockAreaWidget, index);
+  if (dockAreaWidgetResult) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockAreaWidgetResult));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockManagerWrap::findDockWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  Napi::String objectNameNapi = info[0].As<Napi::String>();
+  std::string objectName = objectNameNapi.Utf8Value();
+  QString qObjectName = QString::fromStdString(objectName);
+
+  ads::CDockWidget* dockWidgetResult = this->instance->findDockWidget(qObjectName);
+  if (dockWidgetResult) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockWidgetResult));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockManagerWrap::removeDockWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  Napi::Object dockObjectNapi = info[0].As<Napi::Object>();
+  NodeWidgetWrap* dockWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockObjectNapi);
+  QObject* dockObject = dockWidgetWrap->getInternalInstance();
+  ads::CDockWidget* dockWidget = qobject_cast<ads::CDockWidget*>(dockObject);
+
+  this->instance->removeDockWidget(dockWidget);
+
+  return env.Null();
 }
 
 Napi::Value StaticCDockManagerWrapMethods::setConfigFlag(

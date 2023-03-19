@@ -58,21 +58,41 @@ class Demo {
     const dockArea = this.#dockManager.addDockWidget(DockWidgetArea.CenterDockWidgetArea, dockWidget3, topDockArea);
 
     const customButton = new QToolButton(dockArea);
+    customButton.setText("Create Editor");
     customButton.setToolTip("Create Editor");
-    // customButton.setIcon(svg_icon(":/adsdemo/images/plus.svg"));
     customButton.setAutoRaise(true);
 
     const titleBar = dockArea.titleBar();
     const index = titleBar.indexOf(titleBar.tabBar());
-    // titleBar.insertWidget(index + 1, customButton);
+    titleBar.insertWidget(index + 1, customButton);
 
-    // def on_button_clicked():
-    //     dock_widget = self.create_editor_widget()
-    //     dock_widget.setFeature(QtAds.CDockWidget.DockWidgetDeleteOnClose, True)
-    //     self.dock_manager.addDockWidgetTabToArea(dock_widget, dock_area)
-    //     dock_widget.closeRequested.connect(self.on_editor_close_requested)
-    // custom_button.clicked.connect(on_button_clicked)
+    customButton.addEventListener('clicked', () => {
+      const dockWidget = this.#createFileSystemTreeDockWidget();
+      dockWidget.setFeature(DockWidgetFeature.DockWidgetDeleteOnClose, true);
+      this.#dockManager.addDockWidgetTabToArea(dockWidget, dockArea);
+      // dockWidget.addEventListener('closeRequested', () => {
+      //   // self.on_editor_close_requested
+      // });
+    });
 
+    // Test dock area docking
+    const rightDockArea = this.#dockManager.addDockWidget(
+      DockWidgetArea.RightDockWidgetArea,
+      this.#createLongTextLabelDockWidget(), topDockArea);
+    this.#dockManager.addDockWidget(
+      DockWidgetArea.TopDockWidgetArea,
+      this.#createLongTextLabelDockWidget(), rightDockArea)
+
+    const bottomDockArea = this.#dockManager.addDockWidget(
+      DockWidgetArea.BottomDockWidgetArea,
+        this.#createLongTextLabelDockWidget(), rightDockArea)
+
+    this.#dockManager.addDockWidget(
+      DockWidgetArea.CenterDockWidgetArea,
+        this.#createLongTextLabelDockWidget(), rightDockArea)
+    this.#dockManager.addDockWidget(
+      DockWidgetArea.CenterDockWidgetArea,
+        this.#createLongTextLabelDockWidget(), bottomDockArea)
   }
 
   #createLongTextLabelDockWidget(): CDockWidget {

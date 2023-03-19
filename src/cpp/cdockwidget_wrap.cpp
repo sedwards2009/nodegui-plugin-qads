@@ -87,12 +87,13 @@ Napi::Value CDockWidgetWrap::setWidget(const Napi::CallbackInfo& info) {
   if (info[0].IsNull()) {
     this->instance->setWidget(nullptr);
   } else {
-    QObject* widgetObject = info[0].As<Napi::External<QObject>>().Data();
-    QWidget* widgetWidget = qobject_cast<QWidget*>(widgetObject);
+    Napi::Object parentObject = info[0].As<Napi::Object>();
+    NodeWidgetWrap* parentWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(parentObject);
+    QWidget *widget = parentWidgetWrap->getInternalInstance();
 
     int insertMode = info[1].As<Napi::Number>().Int32Value();
 
-    this->instance->setWidget(widgetWidget, static_cast<ads::CDockWidget::eInsertMode>(insertMode));
+    this->instance->setWidget(widget, static_cast<ads::CDockWidget::eInsertMode>(insertMode));
   }
   return env.Null();
 }

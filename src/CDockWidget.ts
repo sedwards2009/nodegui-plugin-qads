@@ -29,8 +29,7 @@ export class CDockWidget extends QFrame<CDockWidgetSignals> {
     if (widget == null) {
       this.native.setWidget(null, insertMode);
     } else {
-      const extern = widget.native.__external_qobject__();
-      this.native.setWidget(extern, insertMode);
+      this.native.setWidget(widget.native, insertMode);
     }
   }
 
