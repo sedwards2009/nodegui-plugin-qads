@@ -33,5 +33,8 @@ export class CDockAreaWidget extends QFrame<CDockAreaWidgetSignals> {
 wrapperCache.registerWrapper('CDockAreaWidgetWrap', CDockAreaWidget);
 
 export interface CDockAreaWidgetSignals extends QFrameSignals {
-
+  tabBarClicked: (index: number) => void;
+  currentChanging: (index: number) => void;
+  currentChanged: (index: number) => void;
+  viewToggled: (open: boolean) => void;
 }
