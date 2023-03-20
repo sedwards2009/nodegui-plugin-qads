@@ -1,13 +1,32 @@
 #include <napi.h>
+#include "DockComponentsFactory.h"
 #include "cdockcontainerwidget_wrap.h"
 #include "cdockmanager_wrap.h"
 #include "cdockareawidget_wrap.h"
 #include "cdockwidget_wrap.h"
 #include "cdockareatitlebar_wrap.h"
 #include "cdockareatabbar_wrap.h"
+#include "ncdockareatabbar.hpp"
+#include "ncdockareatitlebar.hpp"
 
+
+class NCDockComponentsFactory : public ads::CDockComponentsFactory {
+	virtual ~NCDockComponentsFactory() {}
+	// virtual CDockWidgetTab* createDockWidgetTab(CDockWidget* DockWidget) const;
+	// virtual CAutoHideTab* createDockWidgetSideTab(CDockWidget* DockWidget) const;
+
+	virtual ads::CDockAreaTabBar* createDockAreaTabBar(ads::CDockAreaWidget* DockArea) const {
+    return new NCDockAreaTabBar(DockArea);
+  }
+
+	virtual ads::CDockAreaTitleBar* createDockAreaTitleBar(ads::CDockAreaWidget* DockArea) const {
+    return new NCDockAreaTitleBar(DockArea);
+  }
+};
 
 Napi::Object Main(Napi::Env env, Napi::Object exports) {
+  ads::CDockComponentsFactory::setFactory(new NCDockComponentsFactory());
+
 //  CDockContainerWidgetWrap::init(env, exports);
   CDockManagerWrap::init(env, exports);
   CDockAreaWidgetWrap::init(env, exports);

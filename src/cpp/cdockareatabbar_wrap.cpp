@@ -31,8 +31,7 @@ CDockAreaTabBarWrap::CDockAreaTabBarWrap(const Napi::CallbackInfo& info)
     } else {
 
       Napi::Object parentObject = info[0].As<Napi::Object>();
-      NodeWidgetWrap* parentWidgetWrap =
-          Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(parentObject);
+      NodeWidgetWrap* parentWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(parentObject);
 
       QWidget *widget = parentWidgetWrap->getInternalInstance();
       ads::CDockAreaWidget*areaWidget = qobject_cast<ads::CDockAreaWidget*>(static_cast<QObject*>(widget));

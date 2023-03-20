@@ -34,5 +34,5 @@ export class CDockAreaTitleBar extends QFrame<CDockAreaTitleBarSignals> {
 wrapperCache.registerWrapper('CDockAreaTitleBarWrap', CDockAreaTitleBar);
 
 export interface CDockAreaTitleBarSignals extends QFrameSignals {
-
+	tabBarClicked: (index: number) => void;
 }

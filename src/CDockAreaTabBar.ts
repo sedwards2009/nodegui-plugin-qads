@@ -20,5 +20,13 @@ export class CDockAreaTabBar extends QFrame<CDockAreaTabBarSignals> {
 wrapperCache.registerWrapper('CDockAreaTabBarWrap', CDockAreaTabBar);
 
 export interface CDockAreaTabBarSignals extends QFrameSignals {
-
+	currentChanging: (index: number) => void;
+	currentChanged: (index: number) => void;
+	tabBarClicked: (index: number) => void;
+	tabCloseRequested: (index: number) => void;
+	tabClosed: (index: number) => void;
+	tabOpened: (index: number) => void;
+	tabMoved: (from: number, to: number) => void;
+	removingTab: (index: number) => void;
+	tabInserted: (index: number) => void;
 }
