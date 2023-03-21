@@ -14,17 +14,41 @@ class DLL_EXPORT NCDockManager : public ads::CDockManager, public NodeWidget {
 
   virtual void connectSignalsToEventEmitter() {
     QFRAME_SIGNALS
-    // QObject::connect(this, &QLabel::linkActivated, [=](const QString& link) {
-    //   Napi::Env env = this->emitOnNode.Env();
-    //   Napi::HandleScope scope(env);
-    //   this->emitOnNode.Call({Napi::String::New(env, "linkActivated"),
-    //                          Napi::String::New(env, link.toStdString())});
-    // });
-    // QObject::connect(this, &QLabel::linkHovered, [=](const QString& link) {
-    //   Napi::Env env = this->emitOnNode.Env();
-    //   Napi::HandleScope scope(env);
-    //   this->emitOnNode.Call({Napi::String::New(env, "linkHovered"),
-    //                          Napi::String::New(env, link.toStdString())});
-    // });
+
+    QObject::connect(this, &ads::CDockManager::dockAreaCreated, [=](ads::CDockAreaWidget *dockAreaWidget) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "dockAreaCreated"),
+                             Napi::External<ads::CDockAreaWidget>::New(env, dockAreaWidget)});
+    });
+
+    QObject::connect(this, &ads::CDockManager::dockWidgetAdded, [=](ads::CDockWidget *dockWidget) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "dockWidgetAdded"),
+                             Napi::External<ads::CDockWidget>::New(env, dockWidget)});
+    });
+
+    QObject::connect(this, &ads::CDockManager::dockWidgetAboutToBeRemoved, [=](ads::CDockWidget *dockWidget) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "dockWidgetAboutToBeRemoved"),
+                             Napi::External<ads::CDockWidget>::New(env, dockWidget)});
+    });
+
+    QObject::connect(this, &ads::CDockManager::dockWidgetRemoved, [=](ads::CDockWidget *dockWidget) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "dockWidgetRemoved"),
+                             Napi::External<ads::CDockWidget>::New(env, dockWidget)});
+    });
+
+    QObject::connect(this, &ads::CDockManager::focusedDockWidgetChanged, [=](ads::CDockWidget *dockWidget, ads::CDockWidget *dockWidget2) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "focusedDockWidgetChanged"),
+                             Napi::External<ads::CDockWidget>::New(env, dockWidget),
+                             Napi::External<ads::CDockWidget>::New(env, dockWidget2)});
+    });
   }
 };

@@ -72,7 +72,18 @@ export class CDockManager extends CDockContainerWidget<CDockManagerSignals> {
 wrapperCache.registerWrapper('CDockManagerWrap', CDockManager);
 
 export interface CDockManagerSignals extends CDockContainerWidgetSignals {
-
+  // perspectiveListChanged: () => void;
+  // perspectivesRemoved: () => void;
+  // restoringState: () => void;
+  // stateRestored: () => void;
+  // openingPerspective: (const QString& PerspectiveName) => void;
+  // perspectiveOpened: (const QString& PerspectiveName) => void;
+  // floatingWidgetCreated: (ads::CFloatingDockContainer*) => void;
+  dockAreaCreated: (dockAreaWidget: any /* CDockAreaWidget */) => void;
+  dockWidgetAdded: (dockWidget: any /* ads::CDockWidget* */) => void;
+  dockWidgetAboutToBeRemoved: (dockWidget: any /* ads::CDockWidget* */) => void;
+  dockWidgetRemoved: (dockWidget: any /* ads::CDockWidget */) => void;
+  focusedDockWidgetChanged: (dockWidget: any /* ads::CDockWidget* */, dockWidget2: any /* ads::CDockWidget */) => void;
 }
 
 export enum eConfigFlag {

@@ -27,7 +27,7 @@ class NCDockComponentsFactory : public ads::CDockComponentsFactory {
 Napi::Object Main(Napi::Env env, Napi::Object exports) {
   ads::CDockComponentsFactory::setFactory(new NCDockComponentsFactory());
 
-//  CDockContainerWidgetWrap::init(env, exports);
+  CDockContainerWidgetWrap::init(env, exports);
   CDockManagerWrap::init(env, exports);
   CDockAreaWidgetWrap::init(env, exports);
   CDockWidgetWrap::init(env, exports);
