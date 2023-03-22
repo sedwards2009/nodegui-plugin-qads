@@ -1,4 +1,7 @@
 #include "cdockwidget_wrap.h"
+#include "DockManager.h"
+#include "DockAreaWidget.h"
+#include "DockContainerWidget.h"
 
 
 Napi::FunctionReference CDockWidgetWrap::constructor;
@@ -13,8 +16,26 @@ Napi::Object CDockWidgetWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("features", &CDockWidgetWrap::features),
        InstanceMethod("setWidget", &CDockWidgetWrap::setWidget),
        InstanceMethod("takeWidget", &CDockWidgetWrap::takeWidget),
+       InstanceMethod("widget", &CDockWidgetWrap::widget),
        InstanceMethod("setToggleViewActionMode", &CDockWidgetWrap::setToggleViewActionMode),
        InstanceMethod("setTabToolTip", &CDockWidgetWrap::setTabToolTip),
+       InstanceMethod("isFloating", &CDockWidgetWrap::isFloating),
+       InstanceMethod("isInFloatingContainer", &CDockWidgetWrap::isInFloatingContainer),
+       InstanceMethod("isClosed", &CDockWidgetWrap::isClosed),
+       InstanceMethod("setTabToolTip", &CDockWidgetWrap::setTabToolTip),
+       InstanceMethod("isCentralWidget", &CDockWidgetWrap::isCentralWidget),
+       InstanceMethod("isFullScreen", &CDockWidgetWrap::isFullScreen),
+       InstanceMethod("isTabbed", &CDockWidgetWrap::isTabbed),
+       InstanceMethod("isCurrentTab", &CDockWidgetWrap::isCurrentTab),
+       InstanceMethod("toggleView", &CDockWidgetWrap::toggleView),
+       InstanceMethod("setAsCurrentTab", &CDockWidgetWrap::setAsCurrentTab),
+       InstanceMethod("setFloating", &CDockWidgetWrap::setFloating),
+       InstanceMethod("deleteDockWidget", &CDockWidgetWrap::deleteDockWidget),
+       InstanceMethod("closeDockWidget", &CDockWidgetWrap::closeDockWidget),
+       InstanceMethod("setMinimumSizeHintMode", &CDockWidgetWrap::setMinimumSizeHintMode),
+       InstanceMethod("dockManager", &CDockWidgetWrap::dockManager),
+       InstanceMethod("dockContainer", &CDockWidgetWrap::dockContainer),
+       InstanceMethod("dockAreaWidget", &CDockWidgetWrap::dockAreaWidget),
        QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockWidgetWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
@@ -108,6 +129,16 @@ Napi::Value CDockWidgetWrap::takeWidget(const Napi::CallbackInfo& info) {
   }
 }
 
+Napi::Value CDockWidgetWrap::widget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  QObject* widget = this->instance->widget();
+  if (widget) {
+    return WrapperCache::instance.getWrapper(env, widget);
+  } else {
+    return env.Null();
+  }
+}
+
 Napi::Value CDockWidgetWrap::setToggleViewActionMode(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   int mode = info[0].As<Napi::Number>().Int32Value();
@@ -123,4 +154,114 @@ Napi::Value CDockWidgetWrap::setTabToolTip(const Napi::CallbackInfo& info) {
   QString qTip = QString::fromStdString(tip);
   this->instance->setTabToolTip(qTip);
   return env.Null();
+}
+
+Napi::Value CDockWidgetWrap::isFloating(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->isFloating();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CDockWidgetWrap::isInFloatingContainer(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->isInFloatingContainer();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CDockWidgetWrap::isClosed(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->isClosed();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CDockWidgetWrap::isCentralWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->isCentralWidget();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CDockWidgetWrap::isFullScreen(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->isFullScreen();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CDockWidgetWrap::isTabbed(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->isTabbed();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CDockWidgetWrap::isCurrentTab(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->isCurrentTab();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CDockWidgetWrap::toggleView(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool Open = info[0].As<Napi::Boolean>().Value();
+  this->instance->toggleView(Open);
+  return env.Null();
+}
+
+Napi::Value CDockWidgetWrap::setAsCurrentTab(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  this->instance->setAsCurrentTab();
+  return env.Null();
+}
+
+Napi::Value CDockWidgetWrap::setFloating(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  this->instance->setFloating();
+  return env.Null();
+}
+
+Napi::Value CDockWidgetWrap::deleteDockWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  this->instance->deleteDockWidget();
+  return env.Null();
+}
+
+Napi::Value CDockWidgetWrap::closeDockWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  this->instance->closeDockWidget();
+  return env.Null();
+}
+
+Napi::Value CDockWidgetWrap::setMinimumSizeHintMode(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int mode = info[0].As<Napi::Number>().Int32Value();
+  this->instance->setMinimumSizeHintMode(static_cast<ads::CDockWidget::eMinimumSizeHintMode>(mode));
+  return env.Null();
+}
+
+Napi::Value CDockWidgetWrap::dockManager(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  ads::CDockManager* dockManager = this->instance->dockManager();
+  if (dockManager) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockManager));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockWidgetWrap::dockContainer(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  ads::CDockContainerWidget* dockContainer = this->instance->dockContainer();
+  if (dockContainer) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockContainer));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockWidgetWrap::dockAreaWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  ads::CDockAreaWidget* dockAreaWidget = this->instance->dockAreaWidget();
+  if (dockAreaWidget) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockAreaWidget));
+  } else {
+    return env.Null();
+  }
 }
