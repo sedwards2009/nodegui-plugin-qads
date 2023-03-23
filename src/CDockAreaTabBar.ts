@@ -15,6 +15,36 @@ export class CDockAreaTabBar extends QFrame<CDockAreaTabBarSignals> {
     }
     super(native);
   }
+
+// CLASS: CDockAreaTabBar
+// void insertTab(int index, ads::CDockWidgetTab* Tab);
+// void removeTab(ads::CDockWidgetTab* tab);
+// ads::CDockWidgetTab* currentTab() const;
+// ads::CDockWidgetTab* tab(int Index) const;
+
+  count(): number {
+    return this.native.count();
+  }
+
+  currentIndex(): number {
+    return this.native.currentIndex();
+  }
+
+  isTabOpen(index: number): boolean {
+    return this.native.isTabOpen(index);
+  }
+
+  elidedChanged(elided: boolean): void {
+    this.native.elidedChanged(elided);
+  }
+
+  setCurrentIndex(index: number): void {
+    this.native.setCurrentIndex(index);
+  }
+
+  closeTab(index: number): void {
+    this.native.closeTab(index);
+  }
 }
 
 wrapperCache.registerWrapper('CDockAreaTabBarWrap', CDockAreaTabBar);

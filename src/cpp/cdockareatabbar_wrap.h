@@ -24,5 +24,11 @@ class DLL_EXPORT CDockAreaTabBarWrap : public Napi::ObjectWrap<CDockAreaTabBarWr
   // class constructor
   static Napi::FunctionReference constructor;
   // wrapped methods
-  // Napi::Value selectionStart(const Napi::CallbackInfo& info);
+  Napi::Value count(const Napi::CallbackInfo& info);
+  Napi::Value currentIndex(const Napi::CallbackInfo& info);
+  Napi::Value isTabOpen(const Napi::CallbackInfo& info);
+  Napi::Value elidedChanged(const Napi::CallbackInfo& info);
+  Napi::Value setCurrentIndex(const Napi::CallbackInfo& info);
+  Napi::Value closeTab(const Napi::CallbackInfo& info);
+
 };

@@ -9,7 +9,13 @@ Napi::Object CDockAreaTabBarWrap::init(Napi::Env env, Napi::Object exports) {
   char CLASSNAME[] = "CDockAreaTabBar";
   Napi::Function func = DefineClass(
       env, CLASSNAME,
-      {QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockAreaTabBarWrap)});
+      { InstanceMethod("count", &CDockAreaTabBarWrap::count),
+        InstanceMethod("currentIndex", &CDockAreaTabBarWrap::currentIndex),
+        InstanceMethod("isTabOpen", &CDockAreaTabBarWrap::isTabOpen),
+        InstanceMethod("elidedChanged", &CDockAreaTabBarWrap::elidedChanged),
+        InstanceMethod("setCurrentIndex", &CDockAreaTabBarWrap::setCurrentIndex),
+        InstanceMethod("closeTab", &CDockAreaTabBarWrap::closeTab),
+        QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockAreaTabBarWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
   QOBJECT_REGISTER_WRAPPER(ads::CDockAreaTabBar, CDockAreaTabBarWrap);
@@ -52,4 +58,44 @@ CDockAreaTabBarWrap::CDockAreaTabBarWrap(const Napi::CallbackInfo& info)
   // }
   this->rawData =
       extrautils::configureQWidget(this->getInternalInstance(), true);
+}
+
+Napi::Value CDockAreaTabBarWrap::count(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int result = this->instance->count();
+  return Napi::Number::New(env, result);
+}
+
+Napi::Value CDockAreaTabBarWrap::currentIndex(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int result = this->instance->currentIndex();
+  return Napi::Number::New(env, result);
+}
+
+Napi::Value CDockAreaTabBarWrap::isTabOpen(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int index = info[0].As<Napi::Number>().Int32Value();
+  bool result = this->instance->isTabOpen(index);
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CDockAreaTabBarWrap::elidedChanged(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool elided = info[0].As<Napi::Boolean>().Value();
+  this->instance->elidedChanged(elided);
+  return env.Null();
+}
+
+Napi::Value CDockAreaTabBarWrap::setCurrentIndex(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int index = info[0].As<Napi::Number>().Int32Value();
+  this->instance->setCurrentIndex(index);
+  return env.Null();
+}
+
+Napi::Value CDockAreaTabBarWrap::closeTab(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int index = info[0].As<Napi::Number>().Int32Value();
+  this->instance->closeTab(index);
+  return env.Null();
 }
