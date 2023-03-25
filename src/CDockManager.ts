@@ -19,15 +19,6 @@ export class CDockManager extends CDockContainerWidget<CDockManagerSignals> {
     super(native);
   }
 
-  addDockWidget(area: DockWidgetArea, dockWidget: CDockWidget, dockAreaWidget: CDockAreaWidget = null,
-      index = -1): CDockAreaWidget {
-    return wrapperCache.getWrapper(this.native.addDockWidget(
-      area,
-      dockWidget.native,
-      dockAreaWidget == null ? null : dockAreaWidget.native,
-      index)) as CDockAreaWidget;
-  }
-
   addDockWidgetToContainer(area: DockWidgetArea, dockWidget: CDockWidget,
       dockContainerWidget: CDockContainerWidget): CDockAreaWidget {
     return wrapperCache.getWrapper(this.native.addDockWidgetToContainer(
@@ -58,10 +49,6 @@ export class CDockManager extends CDockContainerWidget<CDockManagerSignals> {
 	// CFloatingDockContainer* addDockWidgetFloating(CDockWidget* Dockwidget);
   findDockWidget(objectName: string): CDockWidget {
     return wrapperCache.getWrapper(this.native.findDockWidget(objectName)) as CDockWidget;
-  }
-
-	removeDockWidget(dockWidget: CDockWidget): void {
-    this.native.removeDockWidget(dockWidget);
   }
 
   static setConfigFlag(flag: eConfigFlag, on: boolean = true): void {

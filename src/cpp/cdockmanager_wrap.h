@@ -4,14 +4,15 @@
 
 #include <QPointer>
 
-#include "QtWidgets/QFrame/qframe_macro.h"
-
 #include "Extras/Export/export.h"
 #include "ncdockmanager.hpp"
+#include "DockAreaWidget.h"
 #include "DockManager.h"
+#include "cdockcontainerwidget_macro.h"
+
 
 class DLL_EXPORT CDockManagerWrap : public Napi::ObjectWrap<CDockManagerWrap> {
-  QFRAME_WRAPPED_METHODS_DECLARATION
+  CDOCKCONTAINERWIDGET_WRAPPED_METHODS_DECLARATION
  private:
   QPointer<ads::CDockManager> instance;
 
@@ -23,12 +24,10 @@ class DLL_EXPORT CDockManagerWrap : public Napi::ObjectWrap<CDockManagerWrap> {
   // class constructor
   static Napi::FunctionReference constructor;
   // wrapped methods
-  Napi::Value addDockWidget(const Napi::CallbackInfo& info);
-	Napi::Value addDockWidgetToContainer(const Napi::CallbackInfo& info);
-	Napi::Value addDockWidgetTab(const Napi::CallbackInfo& info);
-	Napi::Value addDockWidgetTabToArea(const Napi::CallbackInfo& info);
-	Napi::Value findDockWidget(const Napi::CallbackInfo& info);
-	Napi::Value removeDockWidget(const Napi::CallbackInfo& info);
+  Napi::Value addDockWidgetToContainer(const Napi::CallbackInfo& info);
+  Napi::Value addDockWidgetTab(const Napi::CallbackInfo& info);
+  Napi::Value addDockWidgetTabToArea(const Napi::CallbackInfo& info);
+  Napi::Value findDockWidget(const Napi::CallbackInfo& info);
 };
 
 namespace StaticCDockManagerWrapMethods {

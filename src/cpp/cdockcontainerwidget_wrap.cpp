@@ -10,8 +10,7 @@ Napi::Object CDockContainerWidgetWrap::init(Napi::Env env, Napi::Object exports)
   char CLASSNAME[] = "CDockContainerWidget";
   Napi::Function func = DefineClass(
       env, CLASSNAME,
-      {
-       QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockContainerWidgetWrap)});
+      {CDOCKCONTAINERWIDGET_WRAPPED_METHODS_EXPORT_DEFINE(CDockContainerWidgetWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
   QOBJECT_REGISTER_WRAPPER(ads::CDockContainerWidget, CDockContainerWidgetWrap);
