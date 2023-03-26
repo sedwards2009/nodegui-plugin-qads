@@ -25,18 +25,26 @@ class DLL_EXPORT CDockAreaWidgetWrap : public Napi::ObjectWrap<CDockAreaWidgetWr
   // wrapped methods
   Napi::Value setAllowedAreas(const Napi::CallbackInfo& info);
   Napi::Value titleBar(const Napi::CallbackInfo& info);
-
-  // Napi::Value setWidget(const Napi::CallbackInfo& info);
-  // Napi::Value takeWidget(const Napi::CallbackInfo& info);
-  // Napi::Value setToggleViewActionMode(const Napi::CallbackInfo& info);
-
-  // Napi::Value selectionStart(const Napi::CallbackInfo& info);
-  // Napi::Value setBuddy(const Napi::CallbackInfo& info);
-  // Napi::Value buddy(const Napi::CallbackInfo& info);
-  // Napi::Value clear(const Napi::CallbackInfo& info);
-  // Napi::Value setMovie(const Napi::CallbackInfo& info);
-  // Napi::Value setNumDouble(const Napi::CallbackInfo& info);
-  // Napi::Value setNumInt(const Napi::CallbackInfo& info);
-  // Napi::Value setPicture(const Napi::CallbackInfo& info);
-  // Napi::Value setPixmap(const Napi::CallbackInfo& info);
+  Napi::Value dockManager(const Napi::CallbackInfo& info);
+  Napi::Value dockContainer(const Napi::CallbackInfo& info);
+  Napi::Value titleBarGeometry(const Napi::CallbackInfo& info);
+  Napi::Value contentAreaGeometry(const Napi::CallbackInfo& info);
+  Napi::Value dockWidgetsCount(const Napi::CallbackInfo& info);
+  Napi::Value openDockWidgetsCount(const Napi::CallbackInfo& info);
+  Napi::Value currentIndex(const Napi::CallbackInfo& info);
+  Napi::Value indexOfFirstOpenDockWidget(const Napi::CallbackInfo& info);
+  Napi::Value setCurrentIndex(const Napi::CallbackInfo& info);
+  Napi::Value closeArea(const Napi::CallbackInfo& info);
+  Napi::Value closeOtherAreas(const Napi::CallbackInfo& info);
+  Napi::Value isCentralWidgetArea(const Napi::CallbackInfo& info);
+  Napi::Value dockWidgets(const Napi::CallbackInfo& info);
+  Napi::Value openedDockWidgets(const Napi::CallbackInfo& info);
+  Napi::Value dockWidget(const Napi::CallbackInfo& info);
+  Napi::Value currentDockWidget(const Napi::CallbackInfo& info);
+  Napi::Value setCurrentDockWidget(const Napi::CallbackInfo& info);
+  Napi::Value features(const Napi::CallbackInfo& info);
+  Napi::Value allowedAreas(const Napi::CallbackInfo& info);
+  Napi::Value dockAreaFlags(const Napi::CallbackInfo& info);
+  Napi::Value titleBarButton(const Napi::CallbackInfo& info);
+  Napi::Value setDockAreaFlag(const Napi::CallbackInfo& info);
 };

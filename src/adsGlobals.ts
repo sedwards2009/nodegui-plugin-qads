@@ -11,3 +11,10 @@ export enum DockWidgetArea {
 	OuterDockAreas = TopDockWidgetArea | LeftDockWidgetArea | RightDockWidgetArea | BottomDockWidgetArea,
 	AllDockAreas = OuterDockAreas | CenterDockWidgetArea
 };
+
+export enum TitleBarButton {
+	TitleBarButtonTabsMenu = 0,
+	TitleBarButtonUndock = 1,
+	TitleBarButtonClose = 2,
+	TitleBarButtonAutoHide = 3,
+};

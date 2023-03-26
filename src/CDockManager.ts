@@ -51,6 +51,14 @@ export class CDockManager extends CDockContainerWidget<CDockManagerSignals> {
     return wrapperCache.getWrapper(this.native.findDockWidget(objectName)) as CDockWidget;
   }
 
+  centralWidget(): CDockWidget {
+    return wrapperCache.getWrapper(this.native.centralWidget()) as CDockWidget;
+  }
+
+  setCentralWidget(widget: CDockWidget): CDockAreaWidget {
+    return wrapperCache.getWrapper(this.native.setCentralWidget(widget.native)) as CDockAreaWidget;
+  }
+
   static setConfigFlag(flag: eConfigFlag, on: boolean = true): void {
     addon.CDockManager.setConfigFlag(flag, on);
   }

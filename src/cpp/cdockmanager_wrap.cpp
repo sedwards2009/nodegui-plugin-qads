@@ -15,6 +15,8 @@ Napi::Object CDockManagerWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("addDockWidgetTabToArea", &CDockManagerWrap::addDockWidgetTabToArea),
        InstanceMethod("findDockWidget", &CDockManagerWrap::findDockWidget),
        InstanceMethod("removeDockWidget", &CDockManagerWrap::removeDockWidget),
+       InstanceMethod("centralWidget", &CDockManagerWrap::centralWidget),
+       InstanceMethod("setCentralWidget", &CDockManagerWrap::setCentralWidget),
        StaticMethod("setConfigFlag", &StaticCDockManagerWrapMethods::setConfigFlag),
        CDOCKCONTAINERWIDGET_WRAPPED_METHODS_EXPORT_DEFINE(CDockManagerWrap)});
   constructor = Napi::Persistent(func);
@@ -147,6 +149,32 @@ Napi::Value CDockManagerWrap::findDockWidget(const Napi::CallbackInfo& info) {
   ads::CDockWidget* dockWidgetResult = this->instance->findDockWidget(qObjectName);
   if (dockWidgetResult) {
     return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockWidgetResult));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockManagerWrap::centralWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  ads::CDockWidget* dockWidgetResult = this->instance->centralWidget();
+  if (dockWidgetResult) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockWidgetResult));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockManagerWrap::setCentralWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  Napi::Object dockObjectNapi = info[0].As<Napi::Object>();
+  NodeWidgetWrap* dockWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockObjectNapi);
+  QObject* dockObject = dockWidgetWrap->getInternalInstance();
+  ads::CDockWidget* dockWidget = qobject_cast<ads::CDockWidget*>(dockObject);
+
+  ads::CDockAreaWidget* dockAreaWidgetResult = this->instance->setCentralWidget(dockWidget);
+  if (dockAreaWidgetResult) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockAreaWidgetResult));
   } else {
     return env.Null();
   }
