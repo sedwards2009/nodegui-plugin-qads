@@ -47,15 +47,15 @@ export class CDockWidget extends QFrame<CDockWidgetSignals> {
   // TODO: ads::CDockWidgetTab* tabWidget() const;
 
   dockManager(): CDockManager {
-    return wrapperCache.getWrapper(this.native.widget()) as CDockManager;
+    return wrapperCache.getWrapper(this.native.dockManager()) as CDockManager;
   }
 
   dockContainer(): CDockContainerWidget {
-    return wrapperCache.getWrapper(this.native.widget()) as CDockContainerWidget;
+    return wrapperCache.getWrapper(this.native.dockContainer()) as CDockContainerWidget;
   }
 
   dockAreaWidget(): CDockAreaWidget {
-    return wrapperCache.getWrapper(this.native.widget()) as CDockAreaWidget;
+    return wrapperCache.getWrapper(this.native.dockAreaWidget()) as CDockAreaWidget;
   }
 
   widget(): QWidget {
