@@ -15,6 +15,13 @@ class DLL_EXPORT NCDockManager : public ads::CDockManager, public NodeWidget {
   virtual void connectSignalsToEventEmitter() {
     QFRAME_SIGNALS
 
+    QObject::connect(this, &ads::CDockManager::floatingWidgetCreated, [=](ads::CFloatingDockContainer *floatingDockContainer) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "floatingWidgetCreated"),
+                             Napi::External<ads::CFloatingDockContainer>::New(env, floatingDockContainer)});
+    });
+
     QObject::connect(this, &ads::CDockManager::dockAreaCreated, [=](ads::CDockAreaWidget *dockAreaWidget) {
       Napi::Env env = this->emitOnNode.Env();
       Napi::HandleScope scope(env);

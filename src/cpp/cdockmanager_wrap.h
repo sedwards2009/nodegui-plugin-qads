@@ -27,6 +27,7 @@ class DLL_EXPORT CDockManagerWrap : public Napi::ObjectWrap<CDockManagerWrap> {
   Napi::Value addDockWidgetToContainer(const Napi::CallbackInfo& info);
   Napi::Value addDockWidgetTab(const Napi::CallbackInfo& info);
   Napi::Value addDockWidgetTabToArea(const Napi::CallbackInfo& info);
+  Napi::Value addDockWidgetFloating(const Napi::CallbackInfo& info);
   Napi::Value findDockWidget(const Napi::CallbackInfo& info);
   Napi::Value centralWidget(const Napi::CallbackInfo& info);
   Napi::Value setCentralWidget(const Napi::CallbackInfo& info);

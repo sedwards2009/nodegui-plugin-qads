@@ -17,6 +17,7 @@ Napi::Object CDockManagerWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("removeDockWidget", &CDockManagerWrap::removeDockWidget),
        InstanceMethod("centralWidget", &CDockManagerWrap::centralWidget),
        InstanceMethod("setCentralWidget", &CDockManagerWrap::setCentralWidget),
+       InstanceMethod("addDockWidgetFloating", &CDockManagerWrap::addDockWidgetFloating),
        StaticMethod("setConfigFlag", &StaticCDockManagerWrapMethods::setConfigFlag),
        CDOCKCONTAINERWIDGET_WRAPPED_METHODS_EXPORT_DEFINE(CDockManagerWrap)});
   constructor = Napi::Persistent(func);
@@ -138,6 +139,23 @@ Napi::Value CDockManagerWrap::addDockWidgetTabToArea(const Napi::CallbackInfo& i
     return env.Null();
   }
 }
+
+Napi::Value CDockManagerWrap::addDockWidgetFloating(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  Napi::Object dockObjectNapi = info[0].As<Napi::Object>();
+  NodeWidgetWrap* dockWidgetWrap = Napi::ObjectWrap<NodeWidgetWrap>::Unwrap(dockObjectNapi);
+  QObject* dockObject = dockWidgetWrap->getInternalInstance();
+  ads::CDockWidget* dockWidget = qobject_cast<ads::CDockWidget*>(dockObject);
+
+  ads::CFloatingDockContainer* floatingDockContainerResult = this->instance->addDockWidgetFloating(dockWidget);
+  if (floatingDockContainerResult) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(floatingDockContainerResult));
+  } else {
+    return env.Null();
+  }
+}
+
 
 Napi::Value CDockManagerWrap::findDockWidget(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();

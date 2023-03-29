@@ -1,5 +1,6 @@
 import { checkIfNativeElement, NativeElement, QWidget, QWidgetSignals, wrapperCache } from '@nodegui/nodegui';
 import { CDockContainerWidget, CDockContainerWidgetSignals } from './CDockContainerWidget';
+import { CFloatingDockContainer } from './CFloatingDockContainer';
 import addon from './addon';
 import { CDockAreaWidget, CDockWidget, DockWidgetArea } from './main';
 
@@ -46,7 +47,11 @@ export class CDockManager extends CDockContainerWidget<CDockManagerSignals> {
     )) as CDockAreaWidget;
   }
 
-	// CFloatingDockContainer* addDockWidgetFloating(CDockWidget* Dockwidget);
+	addDockWidgetFloating(dockWidget: CDockWidget): CFloatingDockContainer {
+    return wrapperCache.getWrapper(this.native.addDockWidgetFloating(
+      dockWidget.native)) as CFloatingDockContainer;
+  }
+
   findDockWidget(objectName: string): CDockWidget {
     return wrapperCache.getWrapper(this.native.findDockWidget(objectName)) as CDockWidget;
   }
@@ -73,7 +78,7 @@ export interface CDockManagerSignals extends CDockContainerWidgetSignals {
   // stateRestored: () => void;
   // openingPerspective: (const QString& PerspectiveName) => void;
   // perspectiveOpened: (const QString& PerspectiveName) => void;
-  // floatingWidgetCreated: (ads::CFloatingDockContainer*) => void;
+  floatingWidgetCreated: (floatDockContainer: any /* CFloatingDockContainer */) => void;
   dockAreaCreated: (dockAreaWidget: any /* CDockAreaWidget */) => void;
   dockWidgetAdded: (dockWidget: any /* ads::CDockWidget* */) => void;
   dockWidgetAboutToBeRemoved: (dockWidget: any /* ads::CDockWidget* */) => void;
