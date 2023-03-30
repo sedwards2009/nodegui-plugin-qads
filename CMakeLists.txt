@@ -95,6 +95,8 @@ if (APPLE)
     set_target_properties(${PLUGIN_ADDON_NAME} PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE)
 endif()
 
+target_compile_definitions(${PLUGIN_ADDON_NAME} PUBLIC ADS_STATIC)
+
 target_include_directories(${PLUGIN_ADDON_NAME} PRIVATE
     "${CMAKE_JS_INC}"
     "${PROJECT_SOURCE_DIR}"

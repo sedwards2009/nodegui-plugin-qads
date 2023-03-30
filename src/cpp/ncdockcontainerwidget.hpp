@@ -7,7 +7,7 @@
 #include "core/NodeWidget/nodewidget.h"
 
 
-class DLL_EXPORT NCDockContainerWidget : public ads::CDockContainerWidget, public NodeWidget {
+class NCDockContainerWidget : public ads::CDockContainerWidget, public NodeWidget {
   Q_OBJECT
   NODEWIDGET_IMPLEMENTATIONS(CDockContainerWidget)
  public:
