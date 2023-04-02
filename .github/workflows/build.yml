@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: true
+          submodules: recursive
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
@@ -71,6 +71,8 @@ jobs:
       ARCHIVE_FILENAME: nodegui-plugin-qads-binary-${{github.ref_name}}-${{ matrix.platform }}-${{ matrix.arch }}.tar.gz
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - uses: actions/setup-node@v3
         with:
@@ -137,7 +139,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: true
+          submodules: recursive
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
