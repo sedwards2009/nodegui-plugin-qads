@@ -11,7 +11,7 @@
 #include "cdockcontainerwidget_macro.h"
 
 
-class DLL_EXPORT CDockContainerWidgetWrap : public Napi::ObjectWrap<CDockContainerWidgetWrap> {
+class CDockContainerWidgetWrap : public Napi::ObjectWrap<CDockContainerWidgetWrap> {
 
   CDOCKCONTAINERWIDGET_WRAPPED_METHODS_DECLARATION
 

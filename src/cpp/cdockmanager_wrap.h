@@ -11,7 +11,7 @@
 #include "cdockcontainerwidget_macro.h"
 
 
-class DLL_EXPORT CDockManagerWrap : public Napi::ObjectWrap<CDockManagerWrap> {
+class CDockManagerWrap : public Napi::ObjectWrap<CDockManagerWrap> {
   CDOCKCONTAINERWIDGET_WRAPPED_METHODS_DECLARATION
  private:
   QPointer<ads::CDockManager> instance;
@@ -34,5 +34,5 @@ class DLL_EXPORT CDockManagerWrap : public Napi::ObjectWrap<CDockManagerWrap> {
 };
 
 namespace StaticCDockManagerWrapMethods {
-  DLL_EXPORT Napi::Value setConfigFlag(const Napi::CallbackInfo& info);
+  Napi::Value setConfigFlag(const Napi::CallbackInfo& info);
 }

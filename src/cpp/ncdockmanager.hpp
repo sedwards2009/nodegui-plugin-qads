@@ -6,7 +6,7 @@
 #include "QtWidgets/QFrame/qframe_macro.h"
 #include "core/NodeWidget/nodewidget.h"
 
-class DLL_EXPORT NCDockManager : public ads::CDockManager, public NodeWidget {
+class NCDockManager : public ads::CDockManager, public NodeWidget {
   Q_OBJECT
   NODEWIDGET_IMPLEMENTATIONS(CDockManager)
  public:

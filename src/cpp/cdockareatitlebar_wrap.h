@@ -10,7 +10,7 @@
 #include "DockAreaTitleBar.h"
 #include "ncdockareatitlebar.hpp"
 
-class DLL_EXPORT CDockAreaTitleBarWrap : public Napi::ObjectWrap<CDockAreaTitleBarWrap> {
+class CDockAreaTitleBarWrap : public Napi::ObjectWrap<CDockAreaTitleBarWrap> {
   QFRAME_WRAPPED_METHODS_DECLARATION
  private:
   QPointer<ads::CDockAreaTitleBar> instance;

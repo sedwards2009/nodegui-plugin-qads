@@ -9,7 +9,7 @@
 #include "Extras/Export/export.h"
 #include "FloatingDockContainer.h"
 
-class DLL_EXPORT CFloatingDockContainerWrap : public Napi::ObjectWrap<CFloatingDockContainerWrap> {
+class CFloatingDockContainerWrap : public Napi::ObjectWrap<CFloatingDockContainerWrap> {
   QWIDGET_WRAPPED_METHODS_DECLARATION
  private:
   QPointer<ads::CFloatingDockContainer> instance;

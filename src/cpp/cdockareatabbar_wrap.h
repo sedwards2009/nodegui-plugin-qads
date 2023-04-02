@@ -10,7 +10,7 @@
 #include "DockAreaTabBar.h"
 #include "ncdockareatabbar.hpp"
 
-class DLL_EXPORT CDockAreaTabBarWrap : public Napi::ObjectWrap<CDockAreaTabBarWrap> {
+class CDockAreaTabBarWrap : public Napi::ObjectWrap<CDockAreaTabBarWrap> {
   QFRAME_WRAPPED_METHODS_DECLARATION
  private:
   QPointer<ads::CDockAreaTabBar> instance;

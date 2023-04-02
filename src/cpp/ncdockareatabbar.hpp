@@ -7,7 +7,7 @@
 #include "core/NodeWidget/nodewidget.h"
 
 
-class DLL_EXPORT NCDockAreaTabBar : public ads::CDockAreaTabBar, public NodeWidget {
+class NCDockAreaTabBar : public ads::CDockAreaTabBar, public NodeWidget {
   Q_OBJECT
   NODEWIDGET_IMPLEMENTATIONS(CDockAreaTabBar)
  public:

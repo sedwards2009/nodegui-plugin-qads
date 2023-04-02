@@ -10,7 +10,7 @@
 #include "ncdockwidget.hpp"
 #include "DockWidget.h"
 
-class DLL_EXPORT CDockWidgetWrap : public Napi::ObjectWrap<CDockWidgetWrap> {
+class CDockWidgetWrap : public Napi::ObjectWrap<CDockWidgetWrap> {
   QFRAME_WRAPPED_METHODS_DECLARATION
  private:
   QPointer<ads::CDockWidget> instance;
