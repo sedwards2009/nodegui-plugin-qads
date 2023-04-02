@@ -33,39 +33,39 @@ set(SRCS
     "${PROJECT_SOURCE_DIR}/src/cpp/cdockareatabbar_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/ncdockareatabbar.hpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/cfloatingdockcontainer_wrap.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/ads_globals.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockAreaTabBar.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockAreaTitleBar.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockAreaWidget.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockContainerWidget.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockManager.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockOverlay.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockSplitter.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockWidget.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockWidgetTab.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockingStateReader.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockFocusController.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/ElidingLabel.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/FloatingDockContainer.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/FloatingDragPreview.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/IconProvider.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/DockComponentsFactory.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/AutoHideSideBar.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/AutoHideTab.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/AutoHideDockContainer.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/PushButton.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/ResizeHandle.cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/ads.qrc"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/ads_globals.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockAreaTabBar.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockAreaTitleBar.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockAreaWidget.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockContainerWidget.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockManager.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockOverlay.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockSplitter.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockWidget.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockWidgetTab.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockingStateReader.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockFocusController.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/ElidingLabel.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/FloatingDockContainer.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/FloatingDragPreview.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/IconProvider.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockComponentsFactory.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/AutoHideSideBar.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/AutoHideTab.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/AutoHideDockContainer.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/PushButton.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/ResizeHandle.cpp"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/ads.qrc"
 )
 
 if (UNIX AND NOT APPLE)
-    set(SRCS "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src/linux/FloatingWidgetTitleBar.cpp" ${SRCS})
+    set(SRCS "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/linux/FloatingWidgetTitleBar.cpp" ${SRCS})
     #set(ads_HEADERS linux/FloatingWidgetTitleBar.h ${ads_HEADERS})
 endif()
 
 add_library(${PLUGIN_ADDON_NAME} SHARED ${SRCS})
 
-target_include_directories(${PLUGIN_ADDON_NAME} PRIVATE "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src")
+target_include_directories(${PLUGIN_ADDON_NAME} PRIVATE "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src")
 
 AddPluginConfig(${PLUGIN_ADDON_NAME})
 
@@ -99,7 +99,7 @@ target_include_directories(${PLUGIN_ADDON_NAME} PRIVATE
     "${CMAKE_JS_INC}"
     "${PROJECT_SOURCE_DIR}"
     "${PROJECT_SOURCE_DIR}/src/cpp"
-    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System-4.0.2/src"
+    "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src"
 )
 target_link_libraries(${PLUGIN_ADDON_NAME} PRIVATE
     "${CMAKE_JS_LIB}"
