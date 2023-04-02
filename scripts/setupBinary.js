@@ -10,13 +10,13 @@ const packageJson = require('../package');
 
 async function setupBinary() {
     const packageVersion = packageJson.version;
-    const tarballName = `nodegui-plugin-qhotkey-binary-v${packageVersion}-${os.platform()}-${os.arch()}.tar.gz`;
-    const url = `https://github.com/sedwards2009/nodegui-plugin-qhotkey/releases/download/v${packageVersion}/${tarballName}`;
+    const tarballName = `nodegui-plugin-qads-binary-v${packageVersion}-${os.platform()}-${os.arch()}.tar.gz`;
+    const url = `https://github.com/sedwards2009/nodegui-plugin-qads/releases/download/v${packageVersion}/${tarballName}`;
 
     await setupArtifact({
         outDir: SETUP_DIR,
-        id: 'nodegui-plugin-qhotkey',
-        displayName: `Precompiled nodegui-plugin-qhotkey binary`,
+        id: 'nodegui-plugin-qads',
+        displayName: `Precompiled nodegui-plugin-qads binary`,
         downloadLink: url,
         skipSetup: () => false,
     });

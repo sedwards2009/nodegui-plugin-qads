@@ -68,7 +68,7 @@ jobs:
             arch: x64
     runs-on: ${{ matrix.os }}
     env:
-      ARCHIVE_FILENAME: nodegui-plugin-qhotkey-binary-${{github.ref_name}}-${{ matrix.platform }}-${{ matrix.arch }}.tar.gz
+      ARCHIVE_FILENAME: nodegui-plugin-qads-binary-${{github.ref_name}}-${{ matrix.platform }}-${{ matrix.arch }}.tar.gz
     steps:
       - uses: actions/checkout@v3
 
@@ -104,7 +104,7 @@ jobs:
           command: c
           cwd: ./build/Release
           files: |
-            ./nodegui_plugin_qhotkey.node
+            ./nodegui_plugin_qads.node
           outPath: ${{ env.ARCHIVE_FILENAME }}
 
       - name: Compress files (Windows)
@@ -115,7 +115,7 @@ jobs:
           command: c
           cwd: ./build/Release
           files: |
-            ./nodegui_plugin_qhotkey.node
+            ./nodegui_plugin_qads.node
           outPath: ${{ env.ARCHIVE_FILENAME }}
 
       - uses: actions/upload-artifact@v1
