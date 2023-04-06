@@ -1,6 +1,6 @@
 {
     "name": "nodegui-plugin-qads",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "NodeGui plugin for Qt Advanced Docking System",
     "main": "dist/main.js",
     "typings": "dist/main.d.ts",
@@ -12,7 +12,8 @@
         "build:ts": "tsc",
         "prepublish": "npm run clean && npm run build:ts",
         "setupbinary": "node ./scripts/setupBinary.js",
-        "demo": "qode dist/demo.js"
+        "demo": "qode dist/demo.js",
+        "poc": "qode dist/poc.js"
     },
     "author": "Simon Edwards <simon@simonzone.com>",
     "license": "LGPL2",
