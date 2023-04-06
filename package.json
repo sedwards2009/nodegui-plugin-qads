@@ -17,14 +17,10 @@
     "author": "Simon Edwards <simon@simonzone.com>",
     "license": "LGPL2",
     "files": [
-        "src/cpp/*",
-        "dist/addon.js",
-        "dist/main.js",
-        "dist/addon.d.ts",
-        "dist/main.d.ts",
+        "dist/*.js",
+        "dist/*.d.ts",
         "scripts/setupBinary.js",
-        "README.md",
-        "CMakeLists.txt"
+        "README.md"
     ],
     "dependencies": {
         "@nodegui/artifact-installer": "^1.1.0",

@@ -1,5 +1,4 @@
 import { checkIfNativeElement, NativeElement, QFrame, QFrameSignals, QWidget, QWidgetSignals, wrapperCache } from '@nodegui/nodegui';
-import addon from './addon';
 
 
 export class CFloatingDockContainer extends QWidget<CFloatingDockContainerSignals> {

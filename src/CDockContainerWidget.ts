@@ -1,8 +1,7 @@
-import { checkIfNativeElement, NativeElement, QFrame, QFrameSignals, QPoint, wrapperCache } from '@nodegui/nodegui';
+import { QFrame, QFrameSignals, QPoint, wrapperCache } from '@nodegui/nodegui';
 import { DockWidgetArea } from './adsGlobals';
 import { CDockAreaWidget } from './CDockAreaWidget';
 import { CDockWidget } from './CDockWidget';
-// import addon from './addon';
 
 
 export class CDockContainerWidget<Signals extends CDockContainerWidgetSignals=CDockContainerWidgetSignals> extends QFrame<Signals> {
