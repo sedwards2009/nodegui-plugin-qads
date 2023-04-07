@@ -12,6 +12,9 @@ Napi::Object CDockAreaTitleBarWrap::init(Napi::Env env, Napi::Object exports) {
       {InstanceMethod("insertWidget", &CDockAreaTitleBarWrap::insertWidget),
        InstanceMethod("indexOf", &CDockAreaTitleBarWrap::indexOf),
        InstanceMethod("tabBar", &CDockAreaTitleBarWrap::tabBar),
+       InstanceMethod("button", &CDockAreaTitleBarWrap::button),
+       InstanceMethod("updateDockWidgetActionsButtons", &CDockAreaTitleBarWrap::updateDockWidgetActionsButtons),
+       InstanceMethod("titleBarButtonToolTip", &CDockAreaTitleBarWrap::titleBarButtonToolTip),
        QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockAreaTitleBarWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
@@ -86,4 +89,28 @@ Napi::Value CDockAreaTitleBarWrap::tabBar(const Napi::CallbackInfo& info) {
   } else {
     return env.Null();
   }
+}
+
+Napi::Value CDockAreaTitleBarWrap::button(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int which = info[0].As<Napi::Number>().Int32Value();
+  QObject *button = this->instance->button(static_cast<ads::TitleBarButton>(which));
+  if (button) {
+    return WrapperCache::instance.getWrapper(env, button);
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockAreaTitleBarWrap::updateDockWidgetActionsButtons(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  this->instance->updateDockWidgetActionsButtons();
+  return env.Null();
+}
+
+Napi::Value CDockAreaTitleBarWrap::titleBarButtonToolTip(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int button = info[0].As<Napi::Number>().Int32Value();
+  QString result = this->instance->titleBarButtonToolTip(static_cast<ads::TitleBarButton>(button));
+  return Napi::String::New(env, result.toStdString());
 }

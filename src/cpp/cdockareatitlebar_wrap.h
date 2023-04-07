@@ -23,9 +23,10 @@ class CDockAreaTitleBarWrap : public Napi::ObjectWrap<CDockAreaTitleBarWrap> {
   Napi::Value insertWidget(const Napi::CallbackInfo& info);
   Napi::Value indexOf(const Napi::CallbackInfo& info);
   Napi::Value tabBar(const Napi::CallbackInfo& info);
+  Napi::Value button(const Napi::CallbackInfo& info);
+  Napi::Value updateDockWidgetActionsButtons(const Napi::CallbackInfo& info);
+  Napi::Value titleBarButtonToolTip(const Napi::CallbackInfo& info);
 
   // class constructor
   static Napi::FunctionReference constructor;
-  // wrapped methods
-  // Napi::Value selectionStart(const Napi::CallbackInfo& info);
 };
