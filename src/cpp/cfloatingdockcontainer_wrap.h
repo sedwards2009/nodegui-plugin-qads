@@ -19,8 +19,14 @@ class CFloatingDockContainerWrap : public Napi::ObjectWrap<CFloatingDockContaine
   CFloatingDockContainerWrap(const Napi::CallbackInfo& info);
   ~CFloatingDockContainerWrap();
   ads::CFloatingDockContainer* getInternalInstance();
+
   // class constructor
   static Napi::FunctionReference constructor;
   // wrapped methods
-  // Napi::Value setFeature(const Napi::CallbackInfo& info);
+  Napi::Value dockContainer(const Napi::CallbackInfo& info);
+  Napi::Value isClosable(const Napi::CallbackInfo& info);
+  Napi::Value hasTopLevelDockWidget(const Napi::CallbackInfo& info);
+  Napi::Value topLevelDockWidget(const Napi::CallbackInfo& info);
+  Napi::Value dockWidgets(const Napi::CallbackInfo& info);
+
 };

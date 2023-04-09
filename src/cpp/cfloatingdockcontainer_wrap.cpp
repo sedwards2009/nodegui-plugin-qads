@@ -1,4 +1,6 @@
 #include "cfloatingdockcontainer_wrap.h"
+#include "cdockwidget_wrap.h"
+#include "cdockcontainerwidget_wrap.h"
 
 
 Napi::FunctionReference CFloatingDockContainerWrap::constructor;
@@ -9,7 +11,11 @@ Napi::Object CFloatingDockContainerWrap::init(Napi::Env env, Napi::Object export
   Napi::Function func = DefineClass(
       env, CLASSNAME,
       {
-      //  InstanceMethod("setFeature", &CFloatingDockContainerWrap::setFeature),
+       InstanceMethod("dockContainer", &CFloatingDockContainerWrap::dockContainer),
+       InstanceMethod("isClosable", &CFloatingDockContainerWrap::isClosable),
+       InstanceMethod("hasTopLevelDockWidget", &CFloatingDockContainerWrap::hasTopLevelDockWidget),
+       InstanceMethod("topLevelDockWidget", &CFloatingDockContainerWrap::topLevelDockWidget),
+       InstanceMethod("dockWidgets", &CFloatingDockContainerWrap::dockWidgets),
        QWIDGET_WRAPPED_METHODS_EXPORT_DEFINE(CFloatingDockContainerWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
@@ -44,4 +50,47 @@ CFloatingDockContainerWrap::CFloatingDockContainerWrap(const Napi::CallbackInfo&
   // }
   this->rawData =
       extrautils::configureQWidget(this->getInternalInstance(), true);
+}
+
+Napi::Value CFloatingDockContainerWrap::dockContainer(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  ads::CDockContainerWidget* dockContainer = this->instance->dockContainer();
+  if (dockContainer) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockContainer));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CFloatingDockContainerWrap::isClosable(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->isClosable();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CFloatingDockContainerWrap::hasTopLevelDockWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  bool result = this->instance->hasTopLevelDockWidget();
+  return Napi::Boolean::New(env, result);
+}
+
+Napi::Value CFloatingDockContainerWrap::topLevelDockWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  ads::CDockWidget* dockWidgetResult = this->instance->topLevelDockWidget();
+  if (dockWidgetResult) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockWidgetResult));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CFloatingDockContainerWrap::dockWidgets(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+    QList<ads::CDockWidget*> list = this->instance->dockWidgets();
+    Napi::Array resultArrayNapi = Napi::Array::New(env, list.size());
+    for (int i = 0; i < list.size(); i++) {
+      resultArrayNapi[i] =
+          WrapperCache::instance.getWrapper(env, list[i]);
+    }
+    return resultArrayNapi;
 }
