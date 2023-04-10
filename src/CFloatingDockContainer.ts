@@ -1,4 +1,4 @@
-import { checkIfNativeElement, NativeElement, QFrame, QFrameSignals, QWidget, QWidgetSignals, wrapperCache } from '@nodegui/nodegui';
+import { checkIfNativeElement, NativeElement, QFrameSignals, QWidget, wrapperCache } from '@nodegui/nodegui';
 import { CDockContainerWidget } from './CDockContainerWidget';
 import { CDockWidget } from './CDockWidget';
 

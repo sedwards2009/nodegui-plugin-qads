@@ -97,6 +97,10 @@ export class CDockAreaWidget extends QFrame<CDockAreaWidgetSignals> {
     return wrapperCache.getWrapper(this.native.currentDockWidget()) as CDockWidget;
   }
 
+  setCurrentDockWidget(dockWidget: CDockWidget): void {
+    this.native.setCurrentDockWidget(dockWidget.native);
+  }
+
   features(): number /* DockWidgetFeatures */ {
     return this.native.features();
   }
