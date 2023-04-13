@@ -6,3 +6,4 @@ export { CDockWidget, CDockWidgetSignals, DockWidgetFeature, eToggleViewActionMo
 export { DockWidgetArea, TitleBarButton } from './adsGlobals';
 export { CDockAreaTabBar } from './CDockAreaTabBar';
 export { CFloatingDockContainer, CFloatingDockContainerSignals } from './CFloatingDockContainer';
+export { CDockSplitter } from './CDockSplitter';
