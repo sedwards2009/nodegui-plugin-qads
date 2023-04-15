@@ -33,6 +33,7 @@ set(SRCS
     "${PROJECT_SOURCE_DIR}/src/cpp/cdockareatabbar_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/ncdockareatabbar.hpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/cfloatingdockcontainer_wrap.cpp"
+    "${PROJECT_SOURCE_DIR}/src/cpp/ncfloatingdockcontainer.hpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/cdocksplitter_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/ads_globals.cpp"
     "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/DockAreaTabBar.cpp"

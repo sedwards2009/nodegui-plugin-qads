@@ -10,19 +10,32 @@
 #include "cdocksplitter_wrap.h"
 #include "ncdockareatabbar.hpp"
 #include "ncdockareatitlebar.hpp"
+#include "ncfloatingdockcontainer.hpp"
 
 
 class NCDockComponentsFactory : public ads::CDockComponentsFactory {
-	virtual ~NCDockComponentsFactory() {}
-	// virtual CDockWidgetTab* createDockWidgetTab(CDockWidget* DockWidget) const;
-	// virtual CAutoHideTab* createDockWidgetSideTab(CDockWidget* DockWidget) const;
+  virtual ~NCDockComponentsFactory() {}
+  // virtual CDockWidgetTab* createDockWidgetTab(CDockWidget* DockWidget) const;
+  // virtual CAutoHideTab* createDockWidgetSideTab(CDockWidget* DockWidget) const;
 
-	virtual ads::CDockAreaTabBar* createDockAreaTabBar(ads::CDockAreaWidget* DockArea) const {
+  virtual ads::CDockAreaTabBar* createDockAreaTabBar(ads::CDockAreaWidget* DockArea) const {
     return new NCDockAreaTabBar(DockArea);
   }
 
-	virtual ads::CDockAreaTitleBar* createDockAreaTitleBar(ads::CDockAreaWidget* DockArea) const {
+  virtual ads::CDockAreaTitleBar* createDockAreaTitleBar(ads::CDockAreaWidget* DockArea) const {
     return new NCDockAreaTitleBar(DockArea);
+  }
+
+  virtual ads::CFloatingDockContainer* createCFloatingDockContainer(ads::CDockManager* DockManager) const {
+    return new NCFloatingDockContainer(DockManager);
+  }
+
+  virtual ads::CFloatingDockContainer* createCFloatingDockContainer(ads::CDockAreaWidget* DockArea) const {
+    return new NCFloatingDockContainer(DockArea);
+  }
+
+  virtual ads::CFloatingDockContainer* createCFloatingDockContainer(ads::CDockWidget* DockWidget) const {
+    return new NCFloatingDockContainer(DockWidget);
   }
 };
 
