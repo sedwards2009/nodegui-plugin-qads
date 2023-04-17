@@ -27,15 +27,21 @@ class NCDockComponentsFactory : public ads::CDockComponentsFactory {
   }
 
   virtual ads::CFloatingDockContainer* createCFloatingDockContainer(ads::CDockManager* DockManager) const {
-    return new NCFloatingDockContainer(DockManager);
+    ads::CFloatingDockContainer* result = new NCFloatingDockContainer(DockManager);
+    result->init();
+    return result;
   }
 
   virtual ads::CFloatingDockContainer* createCFloatingDockContainer(ads::CDockAreaWidget* DockArea) const {
-    return new NCFloatingDockContainer(DockArea);
+    ads::CFloatingDockContainer* result = new NCFloatingDockContainer(DockArea);
+    result->init();
+    return result;
   }
 
   virtual ads::CFloatingDockContainer* createCFloatingDockContainer(ads::CDockWidget* DockWidget) const {
-    return new NCFloatingDockContainer(DockWidget);
+    ads::CFloatingDockContainer* result = new NCFloatingDockContainer(DockWidget);
+    result->init();
+    return result;
   }
 };
 

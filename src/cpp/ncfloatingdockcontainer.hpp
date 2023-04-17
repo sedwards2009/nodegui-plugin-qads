@@ -9,7 +9,7 @@
 
 class NCFloatingDockContainer : public ads::CFloatingDockContainer, public NodeWidget {
   Q_OBJECT
-  NODEWIDGET_IMPLEMENTATIONS(CFloatingDockContainer)
+  NODEWIDGET_IMPLEMENTATIONS(ads::CFloatingDockContainer)
  public:
   using ads::CFloatingDockContainer::CFloatingDockContainer;  // inherit all constructors
 
