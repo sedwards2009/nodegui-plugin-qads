@@ -11,11 +11,17 @@
 #include "ncdockareatabbar.hpp"
 #include "ncdockareatitlebar.hpp"
 #include "ncfloatingdockcontainer.hpp"
+#include "cdockwidgettab_wrap.h"
+#include "ncdockwidgettab.hpp"
 
 
 class NCDockComponentsFactory : public ads::CDockComponentsFactory {
   virtual ~NCDockComponentsFactory() {}
-  // virtual CDockWidgetTab* createDockWidgetTab(CDockWidget* DockWidget) const;
+
+  virtual ads::CDockWidgetTab* createDockWidgetTab(ads::CDockWidget* DockWidget) const {
+    return new NCDockWidgetTab(DockWidget);
+  }
+
   // virtual CAutoHideTab* createDockWidgetSideTab(CDockWidget* DockWidget) const;
 
   virtual ads::CDockAreaTabBar* createDockAreaTabBar(ads::CDockAreaWidget* DockArea) const {
@@ -56,6 +62,7 @@ Napi::Object Main(Napi::Env env, Napi::Object exports) {
   CDockAreaTabBarWrap::init(env, exports);
   CFloatingDockContainerWrap::init(env, exports);
   CDockSplitterWrap::init(env, exports);
+  CDockWidgetTabWrap::init(env, exports);
 
   return exports;
 }
