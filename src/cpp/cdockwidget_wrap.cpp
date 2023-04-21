@@ -2,6 +2,7 @@
 #include "DockManager.h"
 #include "DockAreaWidget.h"
 #include "DockContainerWidget.h"
+#include "DockWidgetTab.h"
 
 
 Napi::FunctionReference CDockWidgetWrap::constructor;
@@ -36,6 +37,7 @@ Napi::Object CDockWidgetWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("dockManager", &CDockWidgetWrap::dockManager),
        InstanceMethod("dockContainer", &CDockWidgetWrap::dockContainer),
        InstanceMethod("dockAreaWidget", &CDockWidgetWrap::dockAreaWidget),
+       InstanceMethod("tabWidget", &CDockWidgetWrap::tabWidget),
        QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockWidgetWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
@@ -261,6 +263,16 @@ Napi::Value CDockWidgetWrap::dockAreaWidget(const Napi::CallbackInfo& info) {
   ads::CDockAreaWidget* dockAreaWidget = this->instance->dockAreaWidget();
   if (dockAreaWidget) {
     return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockAreaWidget));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockWidgetWrap::tabWidget(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  ads::CDockWidgetTab* dockWidgetTab = this->instance->tabWidget();
+  if (dockWidgetTab) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockWidgetTab));
   } else {
     return env.Null();
   }

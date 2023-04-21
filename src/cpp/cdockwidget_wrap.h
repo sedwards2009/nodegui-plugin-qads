@@ -46,4 +46,5 @@ class CDockWidgetWrap : public Napi::ObjectWrap<CDockWidgetWrap> {
   Napi::Value dockManager(const Napi::CallbackInfo& info);
   Napi::Value dockContainer(const Napi::CallbackInfo& info);
   Napi::Value dockAreaWidget(const Napi::CallbackInfo& info);
+  Napi::Value tabWidget(const Napi::CallbackInfo& info);
 };

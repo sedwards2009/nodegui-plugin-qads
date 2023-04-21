@@ -3,6 +3,7 @@ import addon from './addon';
 import { CDockAreaWidget } from './CDockAreaWidget';
 import { CDockContainerWidget } from './CDockContainerWidget';
 import { CDockManager } from './CDockManager';
+import { CDockWidgetTab } from './CDockWidgetTab';
 
 
 export class CDockWidget extends QFrame<CDockWidgetSignals> {
@@ -44,7 +45,9 @@ export class CDockWidget extends QFrame<CDockWidgetSignals> {
     this.native.setToggleViewActionMode(mode);
   }
 
-  // TODO: ads::CDockWidgetTab* tabWidget() const;
+  tabWidget(): CDockWidgetTab {
+    return wrapperCache.getWrapper(this.native.tabWidget()) as CDockWidgetTab;
+  }
 
   dockManager(): CDockManager {
     return wrapperCache.getWrapper(this.native.dockManager()) as CDockManager;
