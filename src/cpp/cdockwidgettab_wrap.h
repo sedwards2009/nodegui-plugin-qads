@@ -34,6 +34,8 @@ class CDockWidgetTabWrap : public Napi::ObjectWrap<CDockWidgetTabWrap> {
   Napi::Value setIconSize(const Napi::CallbackInfo& info);
   Napi::Value setIcon(const Napi::CallbackInfo& info);
   Napi::Value icon(const Napi::CallbackInfo& info);
+  Napi::Value setFeature(const Napi::CallbackInfo& info);
+  Napi::Value features(const Napi::CallbackInfo& info);
 
   // class constructor
   static Napi::FunctionReference constructor;

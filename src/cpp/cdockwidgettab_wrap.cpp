@@ -25,6 +25,8 @@ Napi::Object CDockWidgetTabWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("setIconSize", &CDockWidgetTabWrap::setIconSize),
        InstanceMethod("setIcon", &CDockWidgetTabWrap::setIcon),
        InstanceMethod("icon", &CDockWidgetTabWrap::icon),
+       InstanceMethod("setFeature", &CDockWidgetTabWrap::setFeature),
+       InstanceMethod("features", &CDockWidgetTabWrap::features),
        QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockWidgetTabWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
@@ -161,4 +163,18 @@ Napi::Value CDockWidgetTabWrap::icon(const Napi::CallbackInfo& info) {
   auto instance = QIconWrap::constructor.New(
       {Napi::External<QIcon>::New(env, new QIcon(icon))});
   return instance;
+}
+
+Napi::Value CDockWidgetTabWrap::setFeature(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int flag = info[0].As<Napi::Number>().Int32Value();
+  bool switchOn = info[1].As<Napi::Boolean>().Value();
+  this->instance->setFeature(static_cast<ads::CDockWidgetTab::DockWidgetTabFeature>(flag), switchOn);
+  return env.Null();
+}
+
+Napi::Value CDockWidgetTabWrap::features(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  auto features = this->instance->features();
+  return Napi::Number::New(env, features);
 }

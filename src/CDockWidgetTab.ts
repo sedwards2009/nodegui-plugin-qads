@@ -61,15 +61,30 @@ export class CDockWidgetTab extends QFrame<CDockWidgetTabSignals> {
   setIconSize(Size: QSize): void {
     this.native.setIconSize(Size);
   }
+
+  setFeature(flag: DockWidgetTabFeature, on: boolean): void {
+    this.native.setFeature(flag, on);
+  }
+
+  features(): number {
+    return this.native.features();
+  }
 }
 
 wrapperCache.registerWrapper('CDockWidgetTabWrap', CDockWidgetTab);
 
 export interface CDockWidgetTabSignals extends QFrameSignals {
-	activeTabChanged: () => void;
-	clicked: () => void;
-	closeRequested: () => void;
-	closeOtherTabsRequested: () => void;
-	moved: (GlobalPos: QPoint) => void;
-	elidedChanged: (elided: boolean) => void;
+  activeTabChanged: () => void;
+  clicked: () => void;
+  closeRequested: () => void;
+  closeOtherTabsRequested: () => void;
+  moved: (GlobalPos: QPoint) => void;
+  elidedChanged: (elided: boolean) => void;
+}
+
+export enum DockWidgetTabFeature {
+  DockWidgetTabContextMenu = 0x1,///< Show context menu
+  DockWidgetTabTitle = 0x2,///< Show the tab label text
+  DefaultDockWidgetTabFeatures = DockWidgetTabContextMenu | DockWidgetTabTitle,
+  NoDockWidgetTabFeatures = 0x0
 }

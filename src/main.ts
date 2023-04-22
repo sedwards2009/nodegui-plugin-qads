@@ -7,4 +7,4 @@ export { DockWidgetArea, TitleBarButton } from './adsGlobals';
 export { CDockAreaTabBar } from './CDockAreaTabBar';
 export { CFloatingDockContainer, CFloatingDockContainerSignals } from './CFloatingDockContainer';
 export { CDockSplitter } from './CDockSplitter';
-export { CDockWidgetTab } from './CDockWidgetTab';
+export { CDockWidgetTab, DockWidgetTabFeature } from './CDockWidgetTab';
