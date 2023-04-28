@@ -19,7 +19,7 @@ Napi::Object CDockContainerWidgetWrap::init(Napi::Env env, Napi::Object exports)
 
 ads::CDockContainerWidget* CDockContainerWidgetWrap::getInternalInstance() { return this->instance; }
 
-CDockContainerWidgetWrap::~CDockContainerWidgetWrap() { extrautils::safeDelete(this->instance); }
+CDockContainerWidgetWrap::~CDockContainerWidgetWrap() { }
 
 CDockContainerWidgetWrap::CDockContainerWidgetWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CDockContainerWidgetWrap>(info) {

@@ -24,7 +24,7 @@ Napi::Object CDockAreaTabBarWrap::init(Napi::Env env, Napi::Object exports) {
 
 ads::CDockAreaTabBar* CDockAreaTabBarWrap::getInternalInstance() { return this->instance; }
 
-CDockAreaTabBarWrap::~CDockAreaTabBarWrap() { extrautils::safeDelete(this->instance); }
+CDockAreaTabBarWrap::~CDockAreaTabBarWrap() { }
 
 CDockAreaTabBarWrap::CDockAreaTabBarWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CDockAreaTabBarWrap>(info) {

@@ -45,7 +45,7 @@ Napi::Object CDockAreaWidgetWrap::init(Napi::Env env, Napi::Object exports) {
 
 ads::CDockAreaWidget* CDockAreaWidgetWrap::getInternalInstance() { return this->instance; }
 
-CDockAreaWidgetWrap::~CDockAreaWidgetWrap() { extrautils::safeDelete(this->instance); }
+CDockAreaWidgetWrap::~CDockAreaWidgetWrap() { }
 
 CDockAreaWidgetWrap::CDockAreaWidgetWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CDockAreaWidgetWrap>(info) {

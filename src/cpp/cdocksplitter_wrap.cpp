@@ -21,7 +21,7 @@ Napi::Object CDockSplitterWrap::init(Napi::Env env, Napi::Object exports) {
 
 ads::CDockSplitter* CDockSplitterWrap::getInternalInstance() { return this->instance; }
 
-CDockSplitterWrap::~CDockSplitterWrap() { extrautils::safeDelete(this->instance); }
+CDockSplitterWrap::~CDockSplitterWrap() { }
 
 CDockSplitterWrap::CDockSplitterWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CDockSplitterWrap>(info) {

@@ -36,7 +36,7 @@ Napi::Object CDockWidgetTabWrap::init(Napi::Env env, Napi::Object exports) {
 
 ads::CDockWidgetTab* CDockWidgetTabWrap::getInternalInstance() { return this->instance; }
 
-CDockWidgetTabWrap::~CDockWidgetTabWrap() { extrautils::safeDelete(this->instance); }
+CDockWidgetTabWrap::~CDockWidgetTabWrap() { }
 
 CDockWidgetTabWrap::CDockWidgetTabWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CDockWidgetTabWrap>(info) {

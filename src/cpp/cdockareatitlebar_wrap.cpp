@@ -24,7 +24,7 @@ Napi::Object CDockAreaTitleBarWrap::init(Napi::Env env, Napi::Object exports) {
 
 ads::CDockAreaTitleBar* CDockAreaTitleBarWrap::getInternalInstance() { return this->instance; }
 
-CDockAreaTitleBarWrap::~CDockAreaTitleBarWrap() { extrautils::safeDelete(this->instance); }
+CDockAreaTitleBarWrap::~CDockAreaTitleBarWrap() { }
 
 CDockAreaTitleBarWrap::CDockAreaTitleBarWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CDockAreaTitleBarWrap>(info) {

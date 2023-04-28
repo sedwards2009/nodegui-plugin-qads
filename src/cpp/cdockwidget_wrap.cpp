@@ -47,7 +47,7 @@ Napi::Object CDockWidgetWrap::init(Napi::Env env, Napi::Object exports) {
 
 ads::CDockWidget* CDockWidgetWrap::getInternalInstance() { return this->instance; }
 
-CDockWidgetWrap::~CDockWidgetWrap() { extrautils::safeDelete(this->instance); }
+CDockWidgetWrap::~CDockWidgetWrap() { }
 
 CDockWidgetWrap::CDockWidgetWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CDockWidgetWrap>(info) {

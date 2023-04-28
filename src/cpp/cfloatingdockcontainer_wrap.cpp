@@ -25,7 +25,7 @@ Napi::Object CFloatingDockContainerWrap::init(Napi::Env env, Napi::Object export
 
 ads::CFloatingDockContainer* CFloatingDockContainerWrap::getInternalInstance() { return this->instance; }
 
-CFloatingDockContainerWrap::~CFloatingDockContainerWrap() { extrautils::safeDelete(this->instance); }
+CFloatingDockContainerWrap::~CFloatingDockContainerWrap() { }
 
 CFloatingDockContainerWrap::CFloatingDockContainerWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CFloatingDockContainerWrap>(info) {
