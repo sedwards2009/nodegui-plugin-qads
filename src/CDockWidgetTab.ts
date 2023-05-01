@@ -61,14 +61,6 @@ export class CDockWidgetTab extends QFrame<CDockWidgetTabSignals> {
   setIconSize(Size: QSize): void {
     this.native.setIconSize(Size);
   }
-
-  setFeature(flag: DockWidgetTabFeature, on: boolean): void {
-    this.native.setFeature(flag, on);
-  }
-
-  features(): number {
-    return this.native.features();
-  }
 }
 
 wrapperCache.registerWrapper('CDockWidgetTabWrap', CDockWidgetTab);

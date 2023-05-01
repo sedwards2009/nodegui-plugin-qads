@@ -122,6 +122,9 @@ export enum eConfigFlag {
   MiddleMouseButtonClosesTab = 0x2000000, //! If the flag is set, the user can use the mouse middle button to close the tab under the mouse
   FloatingContainerIndependent = 0x4000000,	//! Treat floating containers as independent windows
 
+  DockWidgetTabContextMenu = 0x8000000,	//! Show context menu on tabs
+  DockWidgetTabTitle = 0x10000000,		//! Show the tab label text
+
   DefaultDockAreaButtons = DockAreaHasCloseButton
             | DockAreaHasUndockButton
                       | DockAreaHasTabsMenuButton, ///< default configuration of dock area title bar buttons
