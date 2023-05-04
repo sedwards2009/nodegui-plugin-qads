@@ -8,6 +8,7 @@
 #include "ncdockmanager.hpp"
 #include "DockAreaWidget.h"
 #include "DockManager.h"
+#include "FloatingDockContainer.h"
 #include "cdockcontainerwidget_macro.h"
 
 

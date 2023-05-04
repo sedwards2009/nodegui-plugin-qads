@@ -142,7 +142,18 @@
           WrapperCache::instance.getWrapper(env, list[i]);                  \
     }                                                                       \
     return resultArrayNapi;                                                 \
-  }
+  }                                                                         \
+  Napi::Value floatingWidget(const Napi::CallbackInfo& info) {              \
+    Napi::Env env = info.Env();                                             \
+    ads::CFloatingDockContainer* floatingDockContainerResult =              \
+      this->instance->floatingWidget();                                     \
+  if (floatingDockContainerResult) {                                        \
+    return WrapperCache::instance.getWrapper(env,                           \
+      static_cast<QObject*>(floatingDockContainerResult));                  \
+  } else {                                                                  \
+    return env.Null();                                                      \
+  }                                                                         \
+}
 
 
 #define CDOCKCONTAINERWIDGET_WRAPPED_METHODS_EXPORT_DEFINE(WidgetWrapName)        \
@@ -161,6 +172,5 @@
   InstanceMethod("dockArea", &WidgetWrapName::dockArea),                          \
   InstanceMethod("dockAreaAt", &WidgetWrapName::dockAreaAt),                      \
   InstanceMethod("closeOtherAreas", &WidgetWrapName::closeOtherAreas),            \
-  InstanceMethod("openedDockAreas", &WidgetWrapName::openedDockAreas),
-
-  // ads::CFloatingDockContainer* floatingWidget() const;
+  InstanceMethod("openedDockAreas", &WidgetWrapName::openedDockAreas),            \
+  InstanceMethod("floatingWidget", &WidgetWrapName::floatingWidget),

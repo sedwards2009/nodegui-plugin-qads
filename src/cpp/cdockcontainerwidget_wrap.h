@@ -7,6 +7,7 @@
 #include "Extras/Export/export.h"
 #include "DockContainerWidget.h"
 #include "DockAreaWidget.h"
+#include "FloatingDockContainer.h"
 #include "ncdockcontainerwidget.hpp"
 #include "cdockcontainerwidget_macro.h"
 

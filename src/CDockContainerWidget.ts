@@ -2,6 +2,7 @@ import { QFrame, QFrameSignals, QPoint, wrapperCache } from '@nodegui/nodegui';
 import { DockWidgetArea } from './adsGlobals';
 import { CDockAreaWidget } from './CDockAreaWidget';
 import { CDockWidget } from './CDockWidget';
+import { CFloatingDockContainer } from './CFloatingDockContainer';
 
 
 export class CDockContainerWidget<Signals extends CDockContainerWidgetSignals=CDockContainerWidgetSignals> extends QFrame<Signals> {
@@ -16,6 +17,10 @@ export class CDockContainerWidget<Signals extends CDockContainerWidgetSignals=CD
 
   features(): number {
     return this.native.features();
+  }
+
+  floatingWidget(): CFloatingDockContainer {
+    return wrapperCache.getWrapper(this.native.floatingWidget()) as CFloatingDockContainer;
   }
 
   zOrderIndex(): number {

@@ -1,6 +1,7 @@
-#include "cdockcontainerwidget_wrap.h"
 #include "DockContainerWidget.h"
 #include "DockManager.h"
+#include "FloatingDockContainer.h"
+#include "cdockcontainerwidget_wrap.h"
 
 
 Napi::FunctionReference CDockContainerWidgetWrap::constructor;
