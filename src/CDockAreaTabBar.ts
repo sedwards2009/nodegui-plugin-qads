@@ -1,6 +1,7 @@
 import { checkIfNativeElement, NativeElement, QFrame, QFrameSignals, wrapperCache } from '@nodegui/nodegui';
 import addon from './addon';
 import { CDockAreaWidget } from './CDockAreaWidget';
+import { CDockWidgetTab } from './CDockWidgetTab';
 
 
 export class CDockAreaTabBar extends QFrame<CDockAreaTabBarSignals> {
@@ -19,8 +20,14 @@ export class CDockAreaTabBar extends QFrame<CDockAreaTabBarSignals> {
 // CLASS: CDockAreaTabBar
 // void insertTab(int index, ads::CDockWidgetTab* Tab);
 // void removeTab(ads::CDockWidgetTab* tab);
-// ads::CDockWidgetTab* currentTab() const;
-// ads::CDockWidgetTab* tab(int Index) const;
+
+  currentTab(): CDockWidgetTab {
+    return wrapperCache.getWrapper(this.native.currentTab()) as CDockWidgetTab;
+  }
+
+  tab(index: number): CDockWidgetTab {
+    return wrapperCache.getWrapper(this.native.tab(index)) as CDockWidgetTab;
+  }
 
   count(): number {
     return this.native.count();

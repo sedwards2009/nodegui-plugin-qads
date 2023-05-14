@@ -1,5 +1,6 @@
 #include "cdockareatabbar_wrap.h"
 #include "DockAreaWidget.h"
+#include "DockWidgetTab.h"
 
 
 Napi::FunctionReference CDockAreaTabBarWrap::constructor;
@@ -15,6 +16,8 @@ Napi::Object CDockAreaTabBarWrap::init(Napi::Env env, Napi::Object exports) {
         InstanceMethod("elidedChanged", &CDockAreaTabBarWrap::elidedChanged),
         InstanceMethod("setCurrentIndex", &CDockAreaTabBarWrap::setCurrentIndex),
         InstanceMethod("closeTab", &CDockAreaTabBarWrap::closeTab),
+        InstanceMethod("currentTab", &CDockAreaTabBarWrap::currentTab),
+        InstanceMethod("tab", &CDockAreaTabBarWrap::tab),
         QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockAreaTabBarWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
@@ -98,4 +101,25 @@ Napi::Value CDockAreaTabBarWrap::closeTab(const Napi::CallbackInfo& info) {
   int index = info[0].As<Napi::Number>().Int32Value();
   this->instance->closeTab(index);
   return env.Null();
+}
+
+Napi::Value CDockAreaTabBarWrap::currentTab(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  ads::CDockWidgetTab* tab = this->instance->currentTab();
+  if (tab) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(tab));
+  } else {
+    return env.Null();
+  }
+}
+
+Napi::Value CDockAreaTabBarWrap::tab(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  int index = info[0].As<Napi::Number>().Int32Value();
+  ads::CDockWidgetTab* tab = this->instance->tab(index);
+  if (tab) {
+    return WrapperCache::instance.getWrapper(env, static_cast<QObject*>(tab));
+  } else {
+    return env.Null();
+  }
 }

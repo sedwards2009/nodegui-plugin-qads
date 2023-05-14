@@ -30,5 +30,6 @@ class CDockAreaTabBarWrap : public Napi::ObjectWrap<CDockAreaTabBarWrap> {
   Napi::Value elidedChanged(const Napi::CallbackInfo& info);
   Napi::Value setCurrentIndex(const Napi::CallbackInfo& info);
   Napi::Value closeTab(const Napi::CallbackInfo& info);
-
+  Napi::Value currentTab(const Napi::CallbackInfo& info);
+  Napi::Value tab(const Napi::CallbackInfo& info);
 };
