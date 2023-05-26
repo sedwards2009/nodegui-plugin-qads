@@ -31,6 +31,13 @@ class NCDockManager : public ads::CDockManager, public NodeWidget {
                              WrapperCache::instance.getWrapper(env, static_cast<QObject*>(floatingDockContainer))});
     });
 
+    QObject::connect(this, &ads::CDockManager::floatingWidgetAboutToBeDestroyed, [=](ads::CFloatingDockContainer *floatingDockContainer) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "floatingWidgetAboutToBeDestroyed"),
+                             WrapperCache::instance.getWrapper(env, static_cast<QObject*>(floatingDockContainer))});
+    });
+
     QObject::connect(this, &ads::CDockManager::dockAreaCreated, [=](ads::CDockAreaWidget *dockAreaWidget) {
       Napi::Env env = this->emitOnNode.Env();
       Napi::HandleScope scope(env);
