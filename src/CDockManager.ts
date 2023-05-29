@@ -80,7 +80,6 @@ export interface CDockManagerSignals extends CDockContainerWidgetSignals {
   // perspectiveOpened: (const QString& PerspectiveName) => void;
   floatingWidgetCreated: (floatDockContainer: any /* CFloatingDockContainer */) => void;
   floatingWidgetAboutToBeRemoved: (floatDockContainer: any /* CFloatingDockContainer */) => void;
-  floatingWidgetAboutToBeDestroyed: (floatDockContainer: any /* CFloatingDockContainer */) => void;
   dockAreaCreated: (dockAreaWidget: any /* CDockAreaWidget */) => void;
   dockWidgetAdded: (dockWidget: any /* ads::CDockWidget* */) => void;
   dockWidgetAboutToBeRemoved: (dockWidget: any /* ads::CDockWidget* */) => void;
