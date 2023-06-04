@@ -19,6 +19,8 @@ Napi::Object CDockManagerWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("setCentralWidget", &CDockManagerWrap::setCentralWidget),
        InstanceMethod("addDockWidgetFloating", &CDockManagerWrap::addDockWidgetFloating),
        StaticMethod("setConfigFlag", &StaticCDockManagerWrapMethods::setConfigFlag),
+       StaticMethod("setFloatingContainersTitle", &StaticCDockManagerWrapMethods::setFloatingContainersTitle),
+       StaticMethod("floatingContainersTitle", &StaticCDockManagerWrapMethods::floatingContainersTitle),
        CDOCKCONTAINERWIDGET_WRAPPED_METHODS_EXPORT_DEFINE(CDockManagerWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
@@ -205,4 +207,22 @@ Napi::Value StaticCDockManagerWrapMethods::setConfigFlag(
   bool switchOn = info[1].As<Napi::Boolean>().Value();
   ads::CDockManager::setConfigFlag(static_cast<ads::CDockManager::eConfigFlag>(flag), switchOn);
   return env.Null();
+}
+
+Napi::Value StaticCDockManagerWrapMethods::setFloatingContainersTitle(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  Napi::String text = info[0].As<Napi::String>();
+  std::string title = text.Utf8Value();
+  QString qTitle = QString::fromStdString(title);
+  ads::CDockManager::setFloatingContainersTitle(qTitle);
+  return env.Null();
+}
+
+Napi::Value StaticCDockManagerWrapMethods::floatingContainersTitle(
+    const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  QString title = ads::CDockManager::floatingContainersTitle();
+  return Napi::String::New(env, title.toStdString());
 }

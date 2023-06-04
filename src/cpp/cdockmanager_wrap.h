@@ -36,4 +36,6 @@ class CDockManagerWrap : public Napi::ObjectWrap<CDockManagerWrap> {
 
 namespace StaticCDockManagerWrapMethods {
   Napi::Value setConfigFlag(const Napi::CallbackInfo& info);
+  Napi::Value setFloatingContainersTitle(const Napi::CallbackInfo& info);
+  Napi::Value floatingContainersTitle(const Napi::CallbackInfo& info);
 }

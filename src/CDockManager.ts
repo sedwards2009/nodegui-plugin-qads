@@ -67,6 +67,14 @@ export class CDockManager extends CDockContainerWidget<CDockManagerSignals> {
   static setConfigFlag(flag: eConfigFlag, on: boolean = true): void {
     addon.CDockManager.setConfigFlag(flag, on);
   }
+
+  static setFloatingContainersTitle(title: string): void {
+    addon.CDockManager.setFloatingContainersTitle(title);
+  }
+
+  static floatingContainersTitle(): string {
+    return addon.CDockManager.floatingContainersTitle();
+  }
 }
 
 wrapperCache.registerWrapper('CDockManagerWrap', CDockManager);
