@@ -38,6 +38,8 @@ Napi::Object CDockWidgetWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("dockContainer", &CDockWidgetWrap::dockContainer),
        InstanceMethod("dockAreaWidget", &CDockWidgetWrap::dockAreaWidget),
        InstanceMethod("tabWidget", &CDockWidgetWrap::tabWidget),
+       InstanceMethod("setIcon", &CDockWidgetWrap::setIcon),
+       InstanceMethod("icon", &CDockWidgetWrap::icon),
        QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockWidgetWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
@@ -276,4 +278,20 @@ Napi::Value CDockWidgetWrap::tabWidget(const Napi::CallbackInfo& info) {
   } else {
     return env.Null();
   }
+}
+
+Napi::Value CDockWidgetWrap::setIcon(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  QIconWrap* IconWrap = Napi::ObjectWrap<QIconWrap>::Unwrap(info[0].As<Napi::Object>());
+    QIcon* Icon = IconWrap->getInternalInstance();
+  this->instance->setIcon(*Icon);
+  return env.Null();
+}
+
+Napi::Value CDockWidgetWrap::icon(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  QIcon result = this->instance->icon();
+  auto resultInstance = QIconWrap::constructor.New(
+      {Napi::External<QIcon>::New(env, new QIcon(result))});
+    return resultInstance;
 }

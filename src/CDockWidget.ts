@@ -1,4 +1,4 @@
-import { checkIfNativeElement, NativeElement, QFrame, QFrameSignals, QWidget, QWidgetSignals, wrapperCache } from '@nodegui/nodegui';
+import { checkIfNativeElement, NativeElement, QFrame, QFrameSignals, QIcon, QWidget, QWidgetSignals, wrapperCache } from '@nodegui/nodegui';
 import addon from './addon';
 import { CDockAreaWidget } from './CDockAreaWidget';
 import { CDockContainerWidget } from './CDockContainerWidget';
@@ -84,8 +84,15 @@ export class CDockWidget extends QFrame<CDockWidgetSignals> {
     this.native.setMinimumSizeHintMode(mode);
   }
 
-  // TODO: void setIcon(const QIcon& Icon);
-  // TODO: QIcon icon() const;
+  setIcon(Icon: QIcon): void {
+    this.native.setIcon(Icon.native);
+  }
+
+  icon(): QIcon {
+    return this.native.icon();
+  }
+
+  // CLASS: CDockWidget
   // TODO: QToolBar* toolBar() const;
   // TODO: QToolBar* createDefaultToolBar();
   // TODO: void setToolBar(QToolBar* ToolBar /Transfer/ );
