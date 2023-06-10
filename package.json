@@ -1,6 +1,6 @@
 {
     "name": "nodegui-plugin-qads",
-    "version": "0.11.2",
+    "version": "0.11.3",
     "description": "NodeGui plugin for Qt Advanced Docking System",
     "main": "dist/main.js",
     "typings": "dist/main.d.ts",
