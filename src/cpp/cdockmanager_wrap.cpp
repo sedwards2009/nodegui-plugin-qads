@@ -30,8 +30,6 @@ Napi::Object CDockManagerWrap::init(Napi::Env env, Napi::Object exports) {
 
 ads::CDockManager* CDockManagerWrap::getInternalInstance() { return this->instance; }
 
-CDockManagerWrap::~CDockManagerWrap() { }
-
 CDockManagerWrap::CDockManagerWrap(const Napi::CallbackInfo& info)
     : Napi::ObjectWrap<CDockManagerWrap>(info) {
   Napi::Env env = info.Env();

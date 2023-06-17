@@ -89,6 +89,7 @@ export interface CDockManagerSignals extends CDockContainerWidgetSignals {
   floatingWidgetCreated: (floatDockContainer: any /* CFloatingDockContainer */) => void;
   floatingWidgetAboutToBeRemoved: (floatDockContainer: any /* CFloatingDockContainer */) => void;
   dockAreaCreated: (dockAreaWidget: any /* CDockAreaWidget */) => void;
+  dockAreaAboutToBeRemoved: (dockAreaWidget: any /* CDockAreaWidget */) => void;
   dockWidgetAdded: (dockWidget: any /* ads::CDockWidget* */) => void;
   dockWidgetAboutToBeRemoved: (dockWidget: any /* ads::CDockWidget* */) => void;
   dockWidgetRemoved: (dockWidget: any /* ads::CDockWidget */) => void;

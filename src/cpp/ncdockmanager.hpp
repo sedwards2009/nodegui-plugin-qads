@@ -38,6 +38,13 @@ class NCDockManager : public ads::CDockManager, public NodeWidget {
                              WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockAreaWidget))});
     });
 
+    QObject::connect(this, &ads::CDockManager::dockAreaAboutToBeRemoved, [=](ads::CDockAreaWidget *dockAreaWidget) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+      this->emitOnNode.Call({Napi::String::New(env, "dockAreaAboutToBeRemoved"),
+                             WrapperCache::instance.getWrapper(env, static_cast<QObject*>(dockAreaWidget))});
+    });
+
     QObject::connect(this, &ads::CDockManager::dockWidgetAdded, [=](ads::CDockWidget *dockWidget) {
       Napi::Env env = this->emitOnNode.Env();
       Napi::HandleScope scope(env);

@@ -34,11 +34,11 @@ export class CDockAreaWidget extends QFrame<CDockAreaWidgetSignals> {
   }
 
   dockManager(): CDockManager {
-    return wrapperCache.getWrapper(this.native.titleBar()) as CDockManager;
+    return wrapperCache.getWrapper(this.native.dockManager()) as CDockManager;
   }
 
   dockContainer(): CDockContainerWidget {
-    return wrapperCache.getWrapper(this.native.titleBar()) as CDockContainerWidget;
+    return wrapperCache.getWrapper(this.native.dockContainer()) as CDockContainerWidget;
   }
 
   titleBarGeometry(): QRect {
