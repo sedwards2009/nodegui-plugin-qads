@@ -1,10 +1,10 @@
-import { checkIfNativeElement, NativeElement, QFrame, QFrameSignals, wrapperCache } from '@nodegui/nodegui';
+import { checkIfNativeElement, NativeElement, QFrame, QFrameSignals, QScrollArea, QScrollAreaSignals, wrapperCache } from '@nodegui/nodegui';
 import addon from './addon';
 import { CDockAreaWidget } from './CDockAreaWidget';
 import { CDockWidgetTab } from './CDockWidgetTab';
 
 
-export class CDockAreaTabBar extends QFrame<CDockAreaTabBarSignals> {
+export class CDockAreaTabBar extends QScrollArea<CDockAreaTabBarSignals> {
 
   constructor(arg?: CDockAreaWidget | NativeElement) {
     let native: NativeElement;
@@ -56,7 +56,7 @@ export class CDockAreaTabBar extends QFrame<CDockAreaTabBarSignals> {
 
 wrapperCache.registerWrapper('CDockAreaTabBarWrap', CDockAreaTabBar);
 
-export interface CDockAreaTabBarSignals extends QFrameSignals {
+export interface CDockAreaTabBarSignals extends QScrollAreaSignals {
 	currentChanging: (index: number) => void;
 	currentChanged: (index: number) => void;
 	tabBarClicked: (index: number) => void;
