@@ -3,15 +3,14 @@
 #include <napi.h>
 
 #include <QPointer>
-
-#include "QtWidgets/QFrame/qframe_macro.h"
+#include "QtWidgets/QScrollArea/qscrollarea_wrap.h"
 
 #include "Extras/Export/export.h"
 #include "DockAreaTabBar.h"
 #include "ncdockareatabbar.hpp"
 
 class CDockAreaTabBarWrap : public Napi::ObjectWrap<CDockAreaTabBarWrap> {
-  QFRAME_WRAPPED_METHODS_DECLARATION
+  QSCROLLAREA_WRAPPED_METHODS_DECLARATION
  private:
   QPointer<ads::CDockAreaTabBar> instance;
 

@@ -18,7 +18,7 @@ Napi::Object CDockAreaTabBarWrap::init(Napi::Env env, Napi::Object exports) {
         InstanceMethod("closeTab", &CDockAreaTabBarWrap::closeTab),
         InstanceMethod("currentTab", &CDockAreaTabBarWrap::currentTab),
         InstanceMethod("tab", &CDockAreaTabBarWrap::tab),
-        QFRAME_WRAPPED_METHODS_EXPORT_DEFINE(CDockAreaTabBarWrap)});
+        QSCROLLAREA_WRAPPED_METHODS_EXPORT_DEFINE(CDockAreaTabBarWrap)});
   constructor = Napi::Persistent(func);
   exports.Set(CLASSNAME, func);
   QOBJECT_REGISTER_WRAPPER(ads::CDockAreaTabBar, CDockAreaTabBarWrap);
