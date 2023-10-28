@@ -62,7 +62,7 @@ set(SRCS
     "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/ads.qrc"
 )
 
-if (UNIX AND NOT APPLE)
+if (NOT APPLE)
     set(SRCS "${PROJECT_SOURCE_DIR}/Qt-Advanced-Docking-System/src/linux/FloatingWidgetTitleBar.cpp" ${SRCS})
     #set(ads_HEADERS linux/FloatingWidgetTitleBar.h ${ads_HEADERS})
 endif()
