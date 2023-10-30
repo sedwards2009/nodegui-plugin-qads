@@ -125,7 +125,7 @@ export enum eConfigFlag {
   FloatingContainerForceNativeTitleBar = 0x800000, //!< Linux only ! Forces all FloatingContainer to use the native title bar. This might break docking for FloatinContainer on some Window Managers (like Kwin/KDE).
                            //!< If neither this nor FloatingContainerForceCustomTitleBar is set (the default) native titlebars are used except on known bad systems.
                            //! Users can overwrite this by setting the environment variable ADS_UseNativeTitle to "1" or "0".
-      FloatingContainerForceQWidgetTitleBar = 0x1000000,//!< Linux only ! Forces all FloatingContainer to use a QWidget based title bar.
+  FloatingContainerForceQWidgetTitleBar = 0x1000000,//!< Linux only ! Forces all FloatingContainer to use a QWidget based title bar.
                            //!< If neither this nor FloatingContainerForceNativeTitleBar is set (the default) native titlebars are used except on known bad systems.
                            //! Users can overwrite this by setting the environment variable ADS_UseNativeTitle to "1" or "0".
   MiddleMouseButtonClosesTab = 0x2000000, //! If the flag is set, the user can use the mouse middle button to close the tab under the mouse
@@ -133,6 +133,7 @@ export enum eConfigFlag {
 
   DockWidgetTabContextMenu = 0x8000000,	//! Show context menu on tabs
   DockWidgetTabTitle = 0x10000000,		//! Show the tab label text
+  FloatingContainerShowWidgetTitle = 0x20000000,		//! For QWidget window titles, show/hide the title text
 
   DefaultDockAreaButtons = DockAreaHasCloseButton
             | DockAreaHasUndockButton
