@@ -16,6 +16,9 @@ project(${PLUGIN_ADDON_NAME})
 if (UNIX AND NOT APPLE)
     include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
 endif()
+if(APPLE)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
+endif()
 
 set(SRCS
     "${CMAKE_JS_SRC}"
@@ -89,8 +92,6 @@ if (UNIX AND NOT APPLE)
 endif()
 
 if (APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
-
     find_library(CARBON_LIBRARY Carbon)
     mark_as_advanced(CARBON_LIBRARY)
     target_link_libraries(${PLUGIN_ADDON_NAME} PRIVATE ${CARBON_LIBRARY})
