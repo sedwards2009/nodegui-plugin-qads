@@ -89,6 +89,8 @@ if (UNIX AND NOT APPLE)
 endif()
 
 if (APPLE)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
+
     find_library(CARBON_LIBRARY Carbon)
     mark_as_advanced(CARBON_LIBRARY)
     target_link_libraries(${PLUGIN_ADDON_NAME} PRIVATE ${CARBON_LIBRARY})
