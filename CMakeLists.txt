@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 
 set(CMAKE_CXX_STANDARD 17)
+if(APPLE)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum OS X deployment version")
+endif()
 
 # -------------- Plugin Config ---------------
 execute_process(COMMAND node -p "require('@nodegui/nodegui/plugin').CMAKE_HELPER_FILE"
@@ -18,9 +21,6 @@ project(${PLUGIN_ADDON_NAME})
 
 if (UNIX AND NOT APPLE)
     include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
-endif()
-if(APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum OS X deployment version")
 endif()
 
 set(SRCS
